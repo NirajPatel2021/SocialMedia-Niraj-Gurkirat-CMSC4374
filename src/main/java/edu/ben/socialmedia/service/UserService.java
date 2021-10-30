@@ -33,12 +33,12 @@ public class UserService {
         return user;
     }
 
-    public UserDTO updateUser(UserDTO user1) {
-        UserDTO user2 = realUserMap.get(user1.getId());
-        user2.setUsername(user1.getUsername());
-        user2.setPassword(user1.getPassword());
-        return user2;
-    }
+//    public UserDTO updateUser(UserDTO user1) {
+//        UserDTO user2 = realUserMap.get(user1.getId());
+//        user2.setUsername(user1.getUsername());
+//        user2.setPassword(user1.getPassword());
+//        return user2;
+//    }
 
     private static Map<Integer, UserDTO> userMap = Map.of(
             1,UserDTO.of(1,"luke","kendall"),

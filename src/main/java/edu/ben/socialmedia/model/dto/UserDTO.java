@@ -13,7 +13,8 @@ public class UserDTO {
     private int id;
     private String username;
     private String password;
-    private List<Integer> friends;
+    private List<Integer> friends; // list of user id's that are friends
+    private List<Integer> feed; // list of post id's, will include one's own posts and friends posts
 
     public static UserDTO of(){
         return new UserDTO();
