@@ -41,10 +41,10 @@ public class userResource {
         return this.userService.createUser(user);
     }
 
-    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")
-    public UserDTO updateUser(@RequestBody UserDTO user){
-
-        return this.userService.updateUser(user);
-    }
+//    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")
+//    public UserDTO updateUser(@RequestBody UserDTO user){
+//
+//        return this.userService.updateUser(user);
+//    }
 
 }
