@@ -11,6 +11,10 @@ import java.util.Map;
 @Service
 public class UserService {
 
+    public static Map<Long, UserDTO> getAllUsers() {
+        return userMap;
+    }
+
     public UserDTO getUser(long id) {
         try {
             String username = realUserMap.get(id).getUsername();

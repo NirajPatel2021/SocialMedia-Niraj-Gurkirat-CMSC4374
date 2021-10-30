@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Map;
+
 @RestController()
 @RequestMapping(value = "api/user", produces = "application/json")
 public class userResource {
@@ -15,6 +17,13 @@ public class userResource {
     public userResource(UserService userService) {
         this.userService = userService;
     }
+
+
+    @GetMapping()
+    public Map<Long, UserDTO> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
 
     @GetMapping(value= "/{id}")
     public UserDTO getUser(@PathVariable Long id){
