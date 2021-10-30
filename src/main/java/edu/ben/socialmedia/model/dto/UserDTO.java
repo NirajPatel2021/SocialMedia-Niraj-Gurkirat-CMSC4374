@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDTO {
 
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private List<Integer> friends;
@@ -19,13 +19,13 @@ public class UserDTO {
         return new UserDTO();
     }
 
-    public static UserDTO of(Long id){
+    public static UserDTO of(int id){
         UserDTO result = of();
         result.setId(id);
         return result;
     }
 
-    public static UserDTO of(Long id, String username, String password){
+    public static UserDTO of(int id, String username, String password){
         UserDTO result = of(id);
         result.setUsername(username);
         result.setPassword(password);

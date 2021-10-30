@@ -13,8 +13,8 @@ export class UserService {
     return this.http.get<{id:number, username:string}>(`api/user/${id}`);
   }
 
-  public createUser = (data:any): Observable<{id:number, username:string, password:string}> => {
-    return this.http.post<{id:number, username:string, password:string}>(`api/user/createUser`,data);
+  public createUser = (data:any): Observable<{username:string, password:string}> => {
+    return this.http.post<{username:string, password:string}>(`api/user/createUser`,data);
   }
 
   public updateUser = (data:any): Observable<{id:number, username:string, password:string}> => {

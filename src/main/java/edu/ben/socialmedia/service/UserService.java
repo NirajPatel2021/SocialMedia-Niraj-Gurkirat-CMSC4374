@@ -11,11 +11,13 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    public static Map<Long, UserDTO> getAllUsers() {
-        return userMap;
+    int currentId = 3;
+
+    public static Map<Integer, UserDTO> getAllUsers() {
+        return realUserMap;
     }
 
-    public UserDTO getUser(long id) {
+    public UserDTO getUser(int id) {
         try {
             String username = realUserMap.get(id).getUsername();
         } catch (Exception e){
@@ -25,20 +27,22 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO user) {
-        realUserMap.put(user.getId(), user);
+        realUserMap.put(currentId, user);
+        currentId += 1;
+        System.out.println("Current ID: " + currentId);
         return user;
     }
 
-    public UserDTO updateUser(UserDTO user) {
-        UserDTO uzer = realUserMap.get(user.getId());
-        uzer.setUsername(user.getUsername());
-        uzer.setPassword(user.getPassword());
-        return uzer;
+    public UserDTO updateUser(UserDTO user1) {
+        UserDTO user2 = realUserMap.get(user1.getId());
+        user2.setUsername(user1.getUsername());
+        user2.setPassword(user1.getPassword());
+        return user2;
     }
 
-    private static Map<Long, UserDTO> userMap = Map.of(
-            1L,UserDTO.of(1L,"luke","kendall"),
-            2L,UserDTO.of(2L,"tom","cat"));
+    private static Map<Integer, UserDTO> userMap = Map.of(
+            1,UserDTO.of(1,"luke","kendall"),
+            2,UserDTO.of(2,"tom","cat"));
 
-    private static Map<Long, UserDTO> realUserMap = new HashMap<>(userMap);
+    private static Map<Integer, UserDTO> realUserMap = new HashMap<>(userMap);
 }

@@ -14,13 +14,12 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  tempid:number = 0;
-  tempusername:string = "defaultuser";
-  temppassword:string = "defaultpass";
+  tempusername:string = "ClarkKent";
+  temppassword:string = "Superman";
 
   public createUser = (data:any) => {
     this.userService.createUser(data).subscribe((resp)=>{
-      alert(JSON.stringify(resp));
+      // alert(JSON.stringify(resp));
     }, err=> {
       alert(JSON.stringify(err));
     })

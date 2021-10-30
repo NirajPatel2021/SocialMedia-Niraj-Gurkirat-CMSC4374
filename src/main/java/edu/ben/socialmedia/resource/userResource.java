@@ -20,17 +20,17 @@ public class userResource {
 
 
     @GetMapping()
-    public Map<Long, UserDTO> getAllUsers() {
+    public Map<Integer, UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
 
     @GetMapping(value= "/{id}")
-    public UserDTO getUser(@PathVariable Long id){
+    public UserDTO getUser(@PathVariable int id){
 
-        if(id==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot be null");
-        }
+//        if(id==null){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot be null");
+//        }
 
         return userService.getUser(id);
     }
