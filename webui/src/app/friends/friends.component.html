@@ -1,2 +1,19 @@
 <p>friends works!</p>
 
+
+<table class="table table-bordered table-striped display-5 text-primary table-hover">
+  <thead>
+  <tr>
+    <th>User Name</th>
+    <th>Feed</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr  *ngFor="let friend of friends" >
+    <td class="table-warning"><span>{{friend.username}} </span></td>
+    <td class="table-info"><span>{{friend.feed}}</span></td>
+  </tr>
+  </tbody>
+</table>
+

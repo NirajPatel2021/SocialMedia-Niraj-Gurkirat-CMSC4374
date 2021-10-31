@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDTO {
@@ -15,6 +16,7 @@ public class UserDTO {
     private String password;
     private List<Integer> friends; // list of user id's that are friends
     private List<Integer> feed; // list of post id's, will include one's own posts and friends posts
+
 
     public static UserDTO of(){
         return new UserDTO();
@@ -31,6 +33,17 @@ public class UserDTO {
         result.setUsername(username);
         result.setPassword(password);
         return result;
+    }
+
+    public static UserDTO of(int id, String username, String password, List<Integer> friends, List<Integer> feed){
+        UserDTO result = of(id);
+        result.setUsername(username);
+        result.setPassword(password);
+        result.setFriends(friends);
+        result.setFeed(feed);
+        return result;
+
+
     }
 
 
