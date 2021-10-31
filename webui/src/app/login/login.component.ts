@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         if (resp.username !== "null") {
           this.router.navigate([''])
           this.authService.authenticated = true;
+          sessionStorage.setItem('username', this.username)
           console.log("Logged In - Username: " + sessionStorage.getItem("username"))
         } else {
           alert("Invalid Credentials");
