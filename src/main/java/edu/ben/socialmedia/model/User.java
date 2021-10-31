@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class User {
 
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private List<Integer> friends; // list of user id's that are friends
@@ -18,13 +18,13 @@ public class User {
         return new User();
     }
 
-    public static User of(Long id){
+    public static User of(int id){
         User result = of();
         result.setId(id);
         return result;
     }
 
-    public static User of(Long id, String username, String password){
+    public static User of(int id, String username, String password){
         User result = of(id);
         result.setUsername(username);
         result.setPassword(password);

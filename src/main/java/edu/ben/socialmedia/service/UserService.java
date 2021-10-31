@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    int currentId = 3;
+    int currentId = 11;
 
     public static Map<Integer, UserDTO> getAllUsers() {
         return realUserMap;
@@ -20,7 +20,7 @@ public class UserService {
     public UserDTO getUser(int id) {
         try {
             String username = realUserMap.get(id).getUsername();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This user does not exist");
         }
         return realUserMap.get(id);
@@ -29,6 +29,7 @@ public class UserService {
     public UserDTO createUser(UserDTO user) {
         user.setId(currentId);
         realUserMap.put(currentId, user);
+        user.setId(currentId);
         currentId += 1;
         System.out.println("Current ID: " + currentId);
         return user;
@@ -42,8 +43,16 @@ public class UserService {
 //    }
 
     private static Map<Integer, UserDTO> userMap = Map.of(
-            1,UserDTO.of(1,"luke","kendall"),
-            2,UserDTO.of(2,"tom","cat"));
+            1, UserDTO.of(1, "luffy", "captain"),
+            2, UserDTO.of(2, "zoro", "1stmate"),
+            3, UserDTO.of(3, "nami", "navigator"),
+            4, UserDTO.of(4, "usopp", "blacksmith"),
+            5, UserDTO.of(5, "sanji", "cook"),
+            6, UserDTO.of(6, "chopper", "doctor"),
+            7, UserDTO.of(7, "robin", "scholor"),
+            8, UserDTO.of(8, "franky", "shipwright"),
+            9, UserDTO.of(9, "brook", "musician"),
+            10, UserDTO.of(10, "jimbei", "helmsman"));
 
     private static Map<Integer, UserDTO> realUserMap = new HashMap<>(userMap);
 }
