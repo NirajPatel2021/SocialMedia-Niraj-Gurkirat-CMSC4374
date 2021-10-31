@@ -41,7 +41,7 @@ public class UserService {
     public UserDTO checkCredentials(UserDTO user1){
         UserDTO userdto;
         System.out.println(realUserMap.size());
-        for (int i = 1; i < realUserMap.size(); i++){
+        for (int i = 1; i <= realUserMap.size(); i++){
             System.out.println(i + "IIIIII");
             System.out.println(user1.toString() + "user 1");
             if (realUserMap.get(i).getUsername().equals(user1.getUsername())){
