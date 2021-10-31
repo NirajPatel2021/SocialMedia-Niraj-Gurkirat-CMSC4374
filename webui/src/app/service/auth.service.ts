@@ -35,17 +35,6 @@ export class AuthService {
   }
 
 
-  authenticate(username: string, password: string):boolean {
-
-    if (this.authenticateWithBackend(username,password) != null){
-      sessionStorage.setItem('username', username)
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-
 
   logout(){
     sessionStorage.removeItem('username')

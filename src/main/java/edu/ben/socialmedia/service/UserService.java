@@ -38,12 +38,17 @@ public class UserService {
     // Loops through hashmap to see if username and password match
     // if so return id
     // if not return null
-    public Integer checkCredentials(UserDTO user1){
+    public UserDTO checkCredentials(UserDTO user1){
         UserDTO userdto;
-        for (int i = 0; i < realUserMap.size(); i++){
+        System.out.println(realUserMap.size());
+        for (int i = 1; i < realUserMap.size(); i++){
+            System.out.println(i + "IIIIII");
+            System.out.println(user1.toString() + "user 1");
             if (realUserMap.get(i).getUsername().equals(user1.getUsername())){
                 if (realUserMap.get(i).getPassword().equals(user1.getPassword())){
-                    return realUserMap.get(i).getId();
+                    System.out.println("YES");
+
+                    return realUserMap.get(i);
                 }
             }
         }

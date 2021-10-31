@@ -1,5 +1,6 @@
 package edu.ben.socialmedia.resource;
 
+import edu.ben.socialmedia.model.User;
 import edu.ben.socialmedia.model.dto.UserDTO;
 import edu.ben.socialmedia.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,12 @@ public class userResource {
     }
 
     @PostMapping(value = "/checkCredentials", consumes = "application/json", produces = "application/json")
-    public Integer checkCredentials(@RequestBody UserDTO user){
+    public UserDTO checkCredentials(@RequestBody UserDTO user){
+
+
+        if (this.userService.checkCredentials(user) == null){
+            return UserDTO.of(0,"null","null");
+        }
 
         return this.userService.checkCredentials(user);
     }
