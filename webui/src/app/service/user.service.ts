@@ -9,9 +9,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public getUser = (id:number): Observable<{id:number, username:string}> => {
-    return this.http.get<{id:number, username:string}>(`api/user/${id}`);
+  public getUser = (id:number): Observable<{id:number, username:string, password:string, friends: [], feed: []}> => {
+    return this.http.get<{id:number, username:string, password:string, friends: [], feed: []}>(`api/user/${id}`);
   }
+
 
   public createUser = (data:any): Observable<{username:string, password:string}> => {
     return this.http.post<{username:string, password:string}>(`api/user/createUser`,data);
@@ -20,5 +21,11 @@ export class UserService {
   // public updateUser = (data:any): Observable<{id:number, username:string, password:string}> => {
   //   return this.http.put<{id:number, username:string, password:string}>(`api/user/updateUser`,data);
   // }
+
+  public getAllUsers = (): Observable<{id:number, username:string}> => {
+    return this.http.get<{id:number, username:string}>(`api/user/`);
+  }
+
+
 
 }

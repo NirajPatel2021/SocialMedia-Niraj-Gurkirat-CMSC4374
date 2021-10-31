@@ -1,9 +1,9 @@
-<p>Sign Up Here</p>
+<br><p>Sign Up Here</p><br>
 
 
 <form (submit)="createUser({username:tempusername,password:temppassword})" method="post">
   <input type="text" name="username" placeholder="username" [(ngModel)]="tempusername"/>
   <input type="text" name="password" placeholder="password" [(ngModel)]="temppassword"/>
-
-  <input type="submit" value="Submit"/>
+  <input type="submit" class="btn btn-success" value="Submit"/>
 </form>
+

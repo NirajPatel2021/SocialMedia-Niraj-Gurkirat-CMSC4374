@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
 
   public createUser = (data:any) => {
     this.userService.createUser(data).subscribe((resp)=>{
-      // alert(JSON.stringify(resp));
+      alert("Account Created");
     }, err=> {
       alert(JSON.stringify(err));
     })
