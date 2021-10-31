@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class PostService {
 
-    int currentId = 3;
+    Integer currentId = 3;
 
     public static Map<Integer, PostDTO> getAllPosts() {
         return realPostMap;
@@ -27,22 +27,24 @@ public class PostService {
     }
 
     public PostDTO createPost(PostDTO post) {
+        post.setId(currentId);
+        System.out.println("Current ID: " + currentId);
         realPostMap.put(currentId, post);
         currentId += 1;
-        System.out.println("Current ID: " + currentId);
         return post;
     }
 
-//    public PostDTO updateUser(PostDTO user1) {
-//        PostDTO user2 = realUserMap.get(user1.getId());
-//        user2.setUsername(user1.getUsername());
-//        user2.setPassword(user1.getPassword());
-//        return user2;
-//    }
+    public PostDTO updatePost(PostDTO post1) {
+        PostDTO post2 = realPostMap.get(post1.getId());
+        post2.setText(post1.getText());
+//        post2.setTime(post1.getTime());
+//        can only update text
+        return post2;
+    }
 
     private static Map<Integer, PostDTO> postMap = Map.of(
-            1,PostDTO.of(1L,"first post","14:00",1L),
-            2,PostDTO.of(2L,"segundo","14:01",2L));
+            1,PostDTO.of(1,"first post","14:00",1),
+            2,PostDTO.of(2,"segundo","14:01",2));
 
     private static Map<Integer, PostDTO> realPostMap = new HashMap<>(postMap);
 }

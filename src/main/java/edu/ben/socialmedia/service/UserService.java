@@ -27,6 +27,7 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO user) {
+        user.setId(currentId);
         realUserMap.put(currentId, user);
         currentId += 1;
         System.out.println("Current ID: " + currentId);

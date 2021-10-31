@@ -17,8 +17,8 @@ export class UserService {
     return this.http.post<{username:string, password:string}>(`api/user/createUser`,data);
   }
 
-  public updateUser = (data:any): Observable<{id:number, username:string, password:string}> => {
-    return this.http.put<{id:number, username:string, password:string}>(`api/user/updateUser`,data);
-  }
+  // public updateUser = (data:any): Observable<{id:number, username:string, password:string}> => {
+  //   return this.http.put<{id:number, username:string, password:string}>(`api/user/updateUser`,data);
+  // }
 
 }
