@@ -41,6 +41,12 @@ public class userResource {
         return this.userService.createUser(user);
     }
 
+    @PostMapping(value = "/checkCredentials", consumes = "application/json", produces = "application/json")
+    public Integer checkCredentials(@RequestBody UserDTO user){
+
+        return this.userService.checkCredentials(user);
+    }
+
 //    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")
 //    public UserDTO updateUser(@RequestBody UserDTO user){
 //

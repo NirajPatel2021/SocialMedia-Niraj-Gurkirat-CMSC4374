@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UserService} from "./user.service";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class AuthService {
   public loading =  false;
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private http: HttpClient) { }
 
   // authenticate(username: string, password: string)
   // {
@@ -24,15 +26,18 @@ export class AuthService {
   //   }
   // }
 
+  public authenticateWithBackend = (username: string, password: string): Observable<{username:string}> => {
 
-  authenticate(username: string, password: string)
-  {
+    return this.http.post<{username:string}>(`api/user/checkCredentials`,
+      {username,password}
+      );
+
+  }
 
 
+  authenticate(username: string, password: string):boolean {
 
-
-    if (username === "luffy" && password === "password")
-    {
+    if (this.authenticateWithBackend(username,password) != null){
       sessionStorage.setItem('username', username)
       return true;
     }
