@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class Post {
 
-    private Long id;
+    private int id;
     private String text;
     private String time;
     private Long postedBy; // user id
@@ -20,13 +20,13 @@ public class Post {
         return new Post();
     }
 
-    public static Post of(Long id){
+    public static Post of(int id){
         Post result = of();
         result.setId(id);
         return result;
     }
 
-    public static Post of(Long id, String text, String time, Long postedBy){
+    public static Post of(int id, String text, String time, Long postedBy){
         Post result = of(id);
         result.setText(text);
         result.setTime(time);

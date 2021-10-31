@@ -41,10 +41,10 @@ public class postResource {
         return this.postService.createPost(post);
     }
 
-//    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")
-//    public PostDTO updateUser(@RequestBody PostDTO post){
-//
-//        return this.postService.updatePost(post);
-//    }
+    @PutMapping(value = "/updatePost", consumes = "application/json", produces = "application/json")
+    public PostDTO updateUser(@RequestBody PostDTO post){
+
+        return this.postService.updatePost(post);
+    }
 
 }

@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostDTO {
 
-    private Long id;
+    private int id;
     private String text;
     private String time;
-    private Long postedBy; // user id
+    private int postedBy; // user id
 
     // can add later
 //  private List<int> likedBy; // user id’s
@@ -22,13 +22,13 @@ public class PostDTO {
         return new PostDTO();
     }
 
-    public static PostDTO of(Long id){
+    public static PostDTO of(int id){
         PostDTO result = of();
         result.setId(id);
         return result;
     }
 
-    public static PostDTO of(Long id, String text, String time, Long postedBy){
+    public static PostDTO of(int id, String text, String time, int postedBy){
         PostDTO result = of(id);
         result.setText(text);
         result.setTime(time);

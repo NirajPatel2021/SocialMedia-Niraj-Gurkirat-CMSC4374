@@ -1,0 +1,7 @@
+<p>Write your posts here!</p>
+
+<form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:1})" method="post">
+  <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/>
+
+  <input type="submit" value="Post"/>
+</form>
