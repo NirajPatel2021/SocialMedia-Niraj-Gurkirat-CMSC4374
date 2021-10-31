@@ -22,8 +22,8 @@ export class UserService {
   //   return this.http.put<{id:number, username:string, password:string}>(`api/user/updateUser`,data);
   // }
 
-  public getAllUsers = (): Observable<{id:number, username:string}> => {
-    return this.http.get<{id:number, username:string}>(`api/user/`);
+  public getAllUsers = (): Observable<{id:number, username:string, password:string, friends:number[], feed:number[]}[]> => {
+    return this.http.get<{id:number, username:string, password:string, friends:number[], feed:number[]}[]>(`api/user/`);
   }
 
 

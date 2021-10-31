@@ -8,7 +8,9 @@ class users {
     public username: string,
     public password: string,
     public friends: [],
-    public feed: []) {
+    public feed: []
+    )
+  {
   }
 }
 
@@ -31,17 +33,48 @@ export class UsersComponent implements OnInit {
   // }
 
   constructor(
-    private httpClient: HttpClient
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUsers();
   }
 
-  getUser() {
-    this.httpClient.get<any>(`api/user/`).subscribe(response => {
+  getUsers() {
+    this.userService.getAllUsers().subscribe(response => {
+      console.log("response");
+      console.log(response[1]);
       console.log(response);
-      this.users = response;
+
+      this.users = [];
+
+      let i = 1;
+
+      while(i in response){
+
+        let newuser = <users>({
+          id: response[i].id,
+          username: response[i].username,
+          password: response[i].password,
+          friends: response[i].friends,
+          feed: response[i].feed
+        })
+        this.users.push(newuser);
+
+        i++;
+      }
+
+      // for(let i = 0; i < response.length; i++){
+      //   let newuser = <users>({
+      //     id: response[i].id,
+      //     username: response[i].username,
+      //     password: response[i].password,
+      //     friends: response[i].friends,
+      //     feed: response[i].feed
+      //   })
+      //   this.users.push(newuser);
+      // }
+
     });
   }
 
