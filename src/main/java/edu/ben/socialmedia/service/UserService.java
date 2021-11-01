@@ -116,31 +116,37 @@ public class UserService {
         return null;
     }
 
-    public UserDTO acceptRequest(UserDTO user) {
-        System.out.println("Entered acceptRequest");
+    public UserDTO unFriend(UserDTO user) {
         int id1 = Integer.parseInt(user.getUsername());
         int id2 = Integer.parseInt(user.getPassword());
 
 
-//        System.out.println("This is ID1 Loggedin - Sender - Clicker: " + id1);
-//        System.out.println("This is ID2: " + id2);
+        if (realUserMap.get(id2).getFriends().contains(id1)) {
+            realUserMap.get(id2).getFriends().remove(realUserMap.get(id2).getFriends().indexOf(id1));
+        }
 
-        /// luffy send zoro invite
-        /// zoro is id1
-        /// luffy is id2
 
+        if (realUserMap.get(id1).getFriends().contains(id2)) {
+            realUserMap.get(id1).getFriends().remove(realUserMap.get(id1).getFriends().indexOf(id2));
+        }
+
+
+        return null;
+    }
+
+    public UserDTO acceptRequest(UserDTO user) {
+        System.out.println("Entered acceptRequest");
+        int id1 = Integer.parseInt(user.getUsername());
+        int id2 = Integer.parseInt(user.getPassword());
 
         if (!realUserMap.get(id2).getFriends().contains(id1)) {
             if (id2 != 0 && id1 != 0 && id1 != id2) {
                 realUserMap.get(id2).getFriends().add(id1);
             }
         }
-
         if (realUserMap.get(id2).getRequests().contains(id1)) {
             realUserMap.get(id2).getRequests().remove(realUserMap.get(id2).getRequests().indexOf(id1));
-
         }
-
 
         if (!realUserMap.get(id1).getFriends().contains(id2)) {
             if (id2 != 0 && id1 != 0 && id1 != id2) {
@@ -150,9 +156,7 @@ public class UserService {
 
         if (realUserMap.get(id1).getRequests().contains(id2)) {
             realUserMap.get(id1).getRequests().remove(realUserMap.get(id1).getRequests().indexOf(id2));
-
         }
-
 
         return null;
     }
