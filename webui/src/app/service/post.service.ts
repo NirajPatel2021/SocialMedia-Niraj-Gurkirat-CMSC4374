@@ -9,8 +9,12 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  public getPost = (id:number): Observable<{id:number}> => {
+  public getPost = (id:number): Observable<{id:number, text:string, time:string, postedBy:number}> => {
     return this.http.get<{id:number, text:string, time:string, postedBy:number}>(`api/post/${id}`);
+  }
+
+  public getAllPosts = (): Observable<{id:number, text:string, time:string, postedBy:number}[]> => {
+    return this.http.get<{id:number, text:string, time:string, postedBy:number}[]>(`api/post/`);
   }
 
   public createPost = (data:any): Observable<{id: number,text:string, time:string, postedBy:number}> => {
@@ -20,5 +24,7 @@ export class PostService {
   public updatePost = (data:any): Observable<{id:number, text:string, time:string, postedBy:number}> => {
     return this.http.put<{id:number, text:string, time:string, postedBy:number}>(`api/post/updatePost`,data);
   }
+
+
 
 }

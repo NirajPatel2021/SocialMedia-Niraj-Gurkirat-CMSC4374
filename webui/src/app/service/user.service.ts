@@ -22,9 +22,34 @@ export class UserService {
   //   return this.http.put<{id:number, username:string, password:string}>(`api/user/updateUser`,data);
   // }
 
-  public getAllUsers = (): Observable<{id:number, username:string, password:string, friends:number[], feed:number[]}[]> => {
-    return this.http.get<{id:number, username:string, password:string, friends:number[], feed:number[]}[]>(`api/user/`);
+  public getAllUsers = (): Observable<{id:number, username:string, password:string, friends:number[], feed:number[], requests:number[]}[]> => {
+    return this.http.get<{id:number, username:string, password:string, friends:number[], feed:number[], requests:number[]}[]>(`api/user/`);
   }
+
+
+  public sendFriendRequest = (username: number, password: number): Observable<{username:string}> => {
+    return this.http.post<{username:string}>(`api/user/sendFriendRequest`,
+      {username,password}
+    );
+  }
+
+
+  public acceptRequest = (username: number, password: number): Observable<{username:string}> => {
+    return this.http.post<{username:string}>(`api/user/acceptRequest`,
+      {username,password}
+    );
+  }
+
+
+  public denyRequest = (username: number, password: number): Observable<{username:string}> => {
+    return this.http.post<{username:string}>(`api/user/denyRequest`,
+      {username,password}
+    );
+  }
+
+
+
+
 
 
 

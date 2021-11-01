@@ -7,6 +7,9 @@ import { PostService } from "../service/post.service";
   styleUrls: ['./makeposts.component.scss']
 })
 export class MakepostsComponent implements OnInit {
+  title = "Posts"
+  name = sessionStorage.getItem('username')
+
 
   constructor(private postService: PostService) { }
 

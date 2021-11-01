@@ -1,9 +1,12 @@
-<p>friends works!</p>
+Hello {{name}}
+
+
 
 
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
+    <th >User ID</th>
     <th>User Name</th>
     <th>Feed</th>
   </tr>
@@ -11,9 +14,39 @@
   <tbody>
   <tr>
   <tr  *ngFor="let friend of friends" >
+    <td class="table-danger"><span>{{friend.id}}</span></td>
     <td class="table-warning"><span>{{friend.username}} </span></td>
     <td class="table-info"><span>{{friend.feed}}</span></td>
   </tr>
   </tbody>
 </table>
+
+
+<table class="table table-bordered table-striped display-5 text-primary table-hover">
+  <thead>
+  <tr>
+    <th>Post ID</th>
+    <th>Text</th>
+    <th>Time</th>
+    <th>Posted By ID</th>
+    <th>Posted By Name</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr  *ngFor="let post of friendsPosts" >
+    <td class="table-danger"><span>{{post.id}}</span></td>
+    <td class="table-warning"><span>{{post.text}} </span></td>
+    <td class="table-warning"><span>{{post.time}} </span></td>
+    <td class="table-info"><span>{{post.postedByNum}}</span></td>
+    <td class="table-info"><span>{{post.postedByString}}</span></td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+
 

@@ -8,9 +8,9 @@ class users {
     public username: string,
     public password: string,
     public friends: [],
-    public feed: []
-    )
-  {
+    public feed: [],
+    public requests: []
+  ) {
   }
 }
 
@@ -21,20 +21,23 @@ class users {
 })
 export class UsersComponent implements OnInit {
   title = 'User';
+  name = sessionStorage.getItem('username')
+
 
   users: users[] = [];
 
 
-  public user: { id: number, username: String, password:String, friends: [], feed: [] } | null = null
+  public user: { id: number, username: String, password: String, friends: [], feed: [] } | null = null
   userId: number = 1;
-  public errorMessage:string = '';
+  public errorMessage: string = '';
 
   // constructor(private userService: UserService) {
   // }
 
   constructor(
     private userService: UserService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getUsers();
@@ -45,53 +48,55 @@ export class UsersComponent implements OnInit {
       console.log("response");
       console.log(response[1]);
       console.log(response);
-
       this.users = [];
-
       let i = 1;
-
-      while(i in response){
-
+      while (i in response) {
         let newuser = <users>({
           id: response[i].id,
           username: response[i].username,
           password: response[i].password,
           friends: response[i].friends,
-          feed: response[i].feed
+          feed: response[i].feed,
+          requests: response[i].requests
         })
         this.users.push(newuser);
-
         i++;
       }
-
-      // for(let i = 0; i < response.length; i++){
-      //   let newuser = <users>({
-      //     id: response[i].id,
-      //     username: response[i].username,
-      //     password: response[i].password,
-      //     friends: response[i].friends,
-      //     feed: response[i].feed
-      //   })
-      //   this.users.push(newuser);
-      // }
-
     });
   }
 
-  // public getUser = () => {
-  //   this.userService.getUser(this.userId).subscribe((user) => {
-  //     this.user = user;
-  //     this.errorMessage = '';
-  //     this.userId += 1;
-  //   }, err => this.errorMessage = err.error.message);
+
+  // public sendFriendRequest = (data:any) => {
+  //   this.userService.sendFriendRequest(data).subscribe((resp)=>{
+  //     alert(JSON.stringify(resp));
+  //   }, err=> {
+  //     alert(JSON.stringify(err));
+  //   })
+  //
   // }
 
-  // private getAllUsers = () => {
-  //   this.userService.getAllUsers().subscribe((users) => {
-  //     this.users = users;
-  //     this.errorMessage = '';
-  //   }, err => this.errorMessage = err.error.message);
-  // }
+
+  public sendFriendRequest = (data: any) => {
+
+    let LoggedId = 0;
+    this.userService.getAllUsers().subscribe(response => {
+      let i = 1;
+      while (i in response) {
+        if (response[i].username === sessionStorage.getItem('username')) {
+          LoggedId = response[i].id
+          break;
+        }
+        i++;
+      }
+
+      this.userService.sendFriendRequest(LoggedId, data).subscribe(
+        (resp) => {
+          {
+          }
+        })
+    });
+
+  }
 
 
 }

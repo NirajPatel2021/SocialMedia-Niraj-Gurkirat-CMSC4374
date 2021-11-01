@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
-import {HttpClient} from "@angular/common/http";
+import {PostService} from "../service/post.service";
 
 class users {
   constructor(
@@ -8,7 +8,19 @@ class users {
     public username: string,
     public password: string,
     public friends: [],
-    public feed: []
+    public feed: [],
+    public requests: []
+  ) {
+  }
+}
+
+class post {
+  constructor(
+    public id: number,
+    public text: string,
+    public time: string,
+    public postedByNum: number,
+    public postedByString: string
   ) {
   }
 }
@@ -20,20 +32,19 @@ class users {
 })
 export class FriendsComponent implements OnInit {
   title = 'Friends';
+  name = sessionStorage.getItem('username')
 
-  users: users[] = [];
+
   friends: users[] = [];
+  friendsPosts: post[] = [];
+
+
 
   LoggedUserName: string | null = null
-  LoggedId: number = 1;
-
-  public user: { id: number, username: String, password: String, friends: [], feed: [] } | null = null
-  userId: number = 1;
-  public errorMessage: string = '';
-
+  LoggedId: number = 745;
 
   constructor(
-    private userService: UserService
+    private userService: UserService, private postService: PostService
   ) {
   }
 
@@ -41,69 +52,101 @@ export class FriendsComponent implements OnInit {
     this.LoggedUserName = sessionStorage.getItem("username")
     this.findLoggedId()
     this.getUsers();
+    this.getAllPosts();
+
   }
 
   getUsers() {
 
     this.userService.getAllUsers().subscribe(response => {
-
       let j = 0;
       while (j in response[this.LoggedId].friends) {
-        console.log(response[this.LoggedId].friends[j])
-
         let newuser = <users>({
           id: response[response[this.LoggedId].friends[j]].id,
           username: response[response[this.LoggedId].friends[j]].username,
           password: response[response[this.LoggedId].friends[j]].password,
           friends: response[response[this.LoggedId].friends[j]].friends,
-          feed: response[response[this.LoggedId].friends[j]].feed
+          feed: response[response[this.LoggedId].friends[j]].feed,
+          requests: response[response[this.LoggedId].friends[j]].requests
         })
         this.friends.push(newuser);
-
-
         j++
       }
+    });
+  }
 
 
-      this.users = [];
+  getAllPosts() {
+    this.postService.getAllPosts().subscribe(response => {
 
+      let postedBy: number = 1;
+      let username: string = "";
       let i = 1;
-
       while (i in response) {
 
-        let newuser = <users>({
-          id: response[i].id,
-          username: response[i].username,
-          password: response[i].password,
-          friends: response[i].friends,
-          feed: response[i].feed
-        })
-        this.users.push(newuser);
+        let idTemp: number = response[i].id
+        let textTemp: string = response[i].text
+        let timeTemp: string = response[i].time
+        let postedByNumTemp: number = response[i].postedBy
+        postedBy = response[i].postedBy
+        this.userService.getUser(postedBy).subscribe(response => {
+          username = response.username
+
+          let newpost = <post>({
+              id: idTemp,
+              text: textTemp,
+              time: timeTemp,
+              postedByNum: postedByNumTemp,
+              postedByString: username
+            }
+          )
+
+          if (sessionStorage.getItem('username') === newpost.postedByString)
+          {
+            this.friendsPosts.push(newpost);
+          }
+
+
+          let isValidPost = false
+          let k = 0
+          while(k in this.friends){
+            if (this.friends[k].username === username)
+            {
+              isValidPost = true;
+            }
+            k++
+          }
+          if (isValidPost){
+            this.friendsPosts.push(newpost);
+          }
+
+
+
+
+
+        });
 
         i++;
       }
-
-
     });
   }
+
 
   findLoggedId() {
 
     this.userService.getAllUsers().subscribe(response => {
-
       let i = 1;
       while (i in response) {
-        if (response[i].username === this.LoggedUserName)
-        {
+        if (response[i].username === this.LoggedUserName) {
           this.LoggedId = response[i].id
           break;
         }
-
         i++;
       }
-
     });
   }
+
+
 
 
 }
