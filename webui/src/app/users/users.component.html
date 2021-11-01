@@ -1,9 +1,5 @@
-<p>users works!</p>
+Hello {{name}}
 
-
-<button class="card card-small" (click)="getUsers()" tabindex="0">
-  <span>Click Here!</span>
-</button>
 
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
@@ -13,6 +9,7 @@
     <th>Password</th>
     <th>Friends</th>
     <th>Feed</th>
+    <th>Requests</th>
   </tr>
   </thead>
   <tbody>
@@ -23,6 +20,12 @@
     <td class="table-success"><span>{{user.password}}</span></td>
     <td class="table-info"><span>{{user.friends}}</span></td>
     <td class="table-info"><span>{{user.feed}}</span></td>
+    <td class="table-info"><span>{{user.requests}}</span></td>
+    <button class="card card-small" (click)="sendFriendRequest(user.id)" tabindex="0">
+      <span>Send Friend Request!</span>
+    </button>
+
+
   </tr>
   </tbody>
 </table>

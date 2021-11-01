@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./service/auth.service";
 import {Router} from "@angular/router";
 
@@ -12,7 +12,6 @@ export class AppComponent {
   title = 'Social Media';
 
   constructor(public authService: AuthService, private router: Router) {
-
   }
 
   logout() {
@@ -20,8 +19,8 @@ export class AppComponent {
     this.authService.authenticated = false;
     console.log("Logged Out")
     this.router.navigate(['login'])
-  }
 
+  }
 
 
 }

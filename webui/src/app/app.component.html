@@ -8,6 +8,8 @@
 <h1 class="display-1 text-primary"> Welcome To Social Media!</h1><br>
 
 
+
+
 <div *ngIf="!authService.authenticated">
   <button type="button" style="margin:5px" class="btn btn-primary" routerLink="/signup">Sign Up</button>
   <button type="button" style="margin:5px" class="btn btn-primary" routerLink="/login">Login</button>
@@ -20,9 +22,6 @@
   <button type="button" style="margin:5px" class="btn btn-primary" routerLink="/requests">Requests</button>
   <button type="button" style="margin:5px" class="btn btn-primary" routerLink="/friends">Friends</button>
   <button type="button" style="margin:5px" class="btn btn-primary" routerLink="/posts">Posts</button>
-
-
-
 </div>
 <router-outlet></router-outlet>
 

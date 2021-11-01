@@ -26,8 +26,8 @@ public class userResource {
     }
 
 
-    @GetMapping(value= "/{id}")
-    public UserDTO getUser(@PathVariable int id){
+    @GetMapping(value = "/{id}")
+    public UserDTO getUser(@PathVariable int id) {
 
 //        if(id==null){
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot be null");
@@ -37,21 +37,56 @@ public class userResource {
     }
 
     @PostMapping(value = "/createUser", consumes = "application/json", produces = "application/json")
-    public UserDTO createUser(@RequestBody UserDTO user){
+    public UserDTO createUser(@RequestBody UserDTO user) {
 
         return this.userService.createUser(user);
     }
 
     @PostMapping(value = "/checkCredentials", consumes = "application/json", produces = "application/json")
-    public UserDTO checkCredentials(@RequestBody UserDTO user){
+    public UserDTO checkCredentials(@RequestBody UserDTO user) {
 
-
-        if (this.userService.checkCredentials(user) == null){
-            return UserDTO.of(0,"null","null");
+        if (this.userService.checkCredentials(user) == null) {
+            return UserDTO.of(0, "null", "null");
         }
-
         return this.userService.checkCredentials(user);
     }
+
+//    @PostMapping(value = "/sendFriendRequest", consumes = "application/json", produces = "application/json")
+//    public UserDTO sendFriendRequest(@RequestBody UserDTO user) {
+////        System.out.println("USERNAME: " + user.getUsername());
+////        System.out.println("PASSWORD: " + user.getPassword());
+//        if (this.userService.checkCredentials(user) == null) {
+//            return UserDTO.of(0, "null", "null");
+//        }
+//        return this.userService.checkCredentials(user);
+//    }
+
+
+    @PostMapping(value = "/sendFriendRequest", consumes = "application/json", produces = "application/json")
+    public void sendFriendRequest(@RequestBody UserDTO user) {
+        this.userService.sendFriendRequest(user);
+    }
+
+    @PostMapping(value = "/acceptRequest", consumes = "application/json", produces = "application/json")
+    public void acceptRequest(@RequestBody UserDTO user) {
+        this.userService.acceptRequest(user);
+    }
+
+    @PostMapping(value = "/denyRequest", consumes = "application/json", produces = "application/json")
+    public void denyRequest(@RequestBody UserDTO user) {
+        this.userService.denyRequest(user);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 //    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")
 //    public UserDTO updateUser(@RequestBody UserDTO user){
