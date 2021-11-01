@@ -23,7 +23,6 @@ export class FriendsComponent implements OnInit {
 
   users: users[] = [];
   friends: users[] = [];
-  friendsCount: number = 0;
 
   LoggedUserName: string | null = null
   LoggedId: number = 1;
@@ -41,26 +40,12 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
     this.LoggedUserName = sessionStorage.getItem("username")
     this.findLoggedId()
-
-    // console.log("in Init")
-    // console.log(sessionStorage.getItem("username"))
-    // console.log(this.LoggedUserName)
     this.getUsers();
   }
 
   getUsers() {
 
-    // console.log("in getUsers")
-    // console.log(this.LoggedUserName)
-
     this.userService.getAllUsers().subscribe(response => {
-      // console.log("response");
-      // console.log(response[1]);
-      // console.log(response);
-
-      this.friendsCount = response[1].friends.length
-      // console.log("in get users")
-      // console.log(this.friendsCount)
 
       let j = 0;
       while (j in response[this.LoggedId].friends) {
@@ -75,10 +60,8 @@ export class FriendsComponent implements OnInit {
         })
         this.friends.push(newuser);
 
-
         j++
       }
-
 
       this.users = [];
 
@@ -119,6 +102,5 @@ export class FriendsComponent implements OnInit {
 
     });
   }
-
 
 }
