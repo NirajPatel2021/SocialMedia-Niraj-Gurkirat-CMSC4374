@@ -67,6 +67,11 @@ public class userResource {
         this.userService.sendFriendRequest(user);
     }
 
+    @PostMapping(value = "/unFriend", consumes = "application/json", produces = "application/json")
+    public void unFriend(@RequestBody UserDTO user) {
+        this.userService.unFriend(user);
+    }
+
     @PostMapping(value = "/acceptRequest", consumes = "application/json", produces = "application/json")
     public void acceptRequest(@RequestBody UserDTO user) {
         this.userService.acceptRequest(user);
@@ -76,16 +81,6 @@ public class userResource {
     public void denyRequest(@RequestBody UserDTO user) {
         this.userService.denyRequest(user);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 //    @PutMapping(value = "/updateUser", consumes = "application/json", produces = "application/json")

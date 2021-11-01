@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
 import {PostService} from "../service/post.service";
+import {Router} from "@angular/router";
 
 class users {
   constructor(
@@ -39,12 +40,11 @@ export class FriendsComponent implements OnInit {
   friendsPosts: post[] = [];
 
 
-
   LoggedUserName: string | null = null
   LoggedId: number = 745;
 
   constructor(
-    private userService: UserService, private postService: PostService
+    private userService: UserService, private postService: PostService, private router: Router
   ) {
   }
 
@@ -75,7 +75,6 @@ export class FriendsComponent implements OnInit {
     });
   }
 
-
   getAllPosts() {
     this.postService.getAllPosts().subscribe(response => {
 
@@ -101,34 +100,49 @@ export class FriendsComponent implements OnInit {
             }
           )
 
-          if (sessionStorage.getItem('username') === newpost.postedByString)
-          {
+          if (sessionStorage.getItem('username') === newpost.postedByString) {
             this.friendsPosts.push(newpost);
           }
-
-
           let isValidPost = false
           let k = 0
-          while(k in this.friends){
-            if (this.friends[k].username === username)
-            {
+          while (k in this.friends) {
+            if (this.friends[k].username === username) {
               isValidPost = true;
             }
             k++
           }
-          if (isValidPost){
+          if (isValidPost) {
             this.friendsPosts.push(newpost);
           }
-
-
-
-
-
         });
-
         i++;
       }
     });
+  }
+
+
+  public unFriend = (data: any) => {
+
+    let LoggedId = 0;
+    this.userService.getAllUsers().subscribe(response => {
+      let i = 1;
+      while (i in response) {
+        if (response[i].username === sessionStorage.getItem('username')) {
+          LoggedId = response[i].id
+          break;
+        }
+        i++;
+      }
+
+      this.userService.unFriend(LoggedId, data).subscribe(
+        (resp) => {
+          {
+            this.router.navigate([''])
+
+          }
+        })
+    });
+
   }
 
 
@@ -145,8 +159,6 @@ export class FriendsComponent implements OnInit {
       }
     });
   }
-
-
 
 
 }

@@ -1,22 +1,23 @@
 Hello {{name}}
 
 
-
-
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
-    <th >User ID</th>
+    <th>User ID</th>
     <th>User Name</th>
     <th>Feed</th>
   </tr>
   </thead>
   <tbody>
   <tr>
-  <tr  *ngFor="let friend of friends" >
+  <tr *ngFor="let friend of friends">
     <td class="table-danger"><span>{{friend.id}}</span></td>
     <td class="table-warning"><span>{{friend.username}} </span></td>
     <td class="table-info"><span>{{friend.feed}}</span></td>
+    <button class="card card-small" (click)="unFriend(friend.id)" tabindex="0">
+      <span>UnFriend!</span>
+    </button>
   </tr>
   </tbody>
 </table>
@@ -35,7 +36,7 @@ Hello {{name}}
   </thead>
   <tbody>
   <tr>
-  <tr  *ngFor="let post of friendsPosts" >
+  <tr *ngFor="let post of friendsPosts">
     <td class="table-danger"><span>{{post.id}}</span></td>
     <td class="table-warning"><span>{{post.text}} </span></td>
     <td class="table-warning"><span>{{post.time}} </span></td>
