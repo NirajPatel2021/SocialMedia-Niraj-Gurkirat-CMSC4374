@@ -53,7 +53,6 @@ export class FriendsComponent implements OnInit {
     this.findLoggedId()
     this.getUsers();
     this.getAllPosts();
-
   }
 
   getUsers() {
@@ -70,6 +69,7 @@ export class FriendsComponent implements OnInit {
           requests: response[response[this.LoggedId].friends[j]].requests
         })
         this.friends.push(newuser);
+
         j++
       }
     });
@@ -100,9 +100,6 @@ export class FriendsComponent implements OnInit {
             }
           )
 
-          if (sessionStorage.getItem('username') === newpost.postedByString) {
-            this.friendsPosts.push(newpost);
-          }
           let isValidPost = false
           let k = 0
           while (k in this.friends) {
