@@ -47,4 +47,11 @@ public class postResource {
         return this.postService.updatePost(post);
     }
 
+
+    @DeleteMapping(value = "/deletePost/{id}")
+    public void deletePost(@PathVariable int id){
+
+        this.postService.deletePost(id);
+    }
+
 }

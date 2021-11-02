@@ -9,8 +9,8 @@ Hello {{name}}
     <th>Time</th>
     <th>Posted By ID</th>
     <th>Posted By Name</th>
-
-
+    <th></th>
+    <th></th>
 
   </tr>
   </thead>
@@ -22,6 +22,16 @@ Hello {{name}}
     <td class="table-warning"><span>{{post.time}} </span></td>
     <td class="table-info"><span>{{post.postedByNum}}</span></td>
     <td class="table-info"><span>{{post.postedByString}}</span></td>
+    <td>
+      <button class="card card-small" (click)="updatePost(post.id)" tabindex="0">
+        <span>Edit</span>
+      </button>
+    </td>
+    <td>
+      <button class="card card-small" (click)="deletePost(post.id)" tabindex="0">
+        <span>Delete</span>
+      </button>
+    </td>
   </tr>
   </tbody>
 </table>

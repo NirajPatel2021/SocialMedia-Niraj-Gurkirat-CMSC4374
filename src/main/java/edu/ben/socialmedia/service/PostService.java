@@ -52,6 +52,20 @@ public class PostService {
         return post2;
     }
 
+    public void deletePost(Integer postId) {
+
+        try {
+            for(int i = 1; i <= realPostMap.size(); i++){
+                if (realPostMap.get(i).getId() == postId){
+                    realPostMap.remove(i);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This post does not exist");
+        }
+    }
+
     private static Map<Integer, PostDTO> postMap = Map.of(
             1, PostDTO.of(1, "this is the first post", "01:01", 1),
             2, PostDTO.of(2, "this is the second post", "02:02", 2),
