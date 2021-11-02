@@ -2,6 +2,29 @@ import {Component, OnInit} from '@angular/core';
 import {PostService} from "../service/post.service";
 import {UserService} from "../service/user.service";
 
+class users {
+  constructor(
+    public id: number,
+    public username: string,
+    public password: string,
+    public friends: [],
+    public feed: [],
+    public requests: []
+  ) {
+  }
+}
+
+class post {
+  constructor(
+    public id: number,
+    public text: string,
+    public time: string,
+    public postedByNum: number,
+    public postedByString: string
+  ) {
+  }
+}
+
 @Component({
   selector: 'app-makeposts',
   templateUrl: './makeposts.component.html',
@@ -11,11 +34,15 @@ export class MakepostsComponent implements OnInit {
   title = "Posts"
   name = sessionStorage.getItem('username')
 
+  friends: users[] = [];
+  friendsPosts: post[] = [];
+
   constructor(private postService: PostService, private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.findLoggedId()
+    this.getAllPosts()
 
   }
 
@@ -39,6 +66,39 @@ export class MakepostsComponent implements OnInit {
       alert(JSON.stringify(err));
     })
 
+  }
+
+  getAllPosts() {
+    this.postService.getAllPosts().subscribe(response => {
+
+      let postedBy: number = 1;
+      let username: string = "";
+      let i = 1;
+      while (i in response) {
+
+        let idTemp: number = response[i].id
+        let textTemp: string = response[i].text
+        let timeTemp: string = response[i].time
+        let postedByNumTemp: number = response[i].postedBy
+        postedBy = response[i].postedBy
+        this.userService.getUser(postedBy).subscribe(response => {
+          username = response.username
+          let newpost = <post>({
+              id: idTemp,
+              text: textTemp,
+              time: timeTemp,
+              postedByNum: postedByNumTemp,
+              postedByString: username
+            }
+          )
+
+          if (newpost.postedByString === sessionStorage.getItem('username')) {
+            this.friendsPosts.push(newpost);
+          }
+        });
+        i++;
+      }
+    });
   }
 
 
