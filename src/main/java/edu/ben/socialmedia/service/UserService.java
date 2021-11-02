@@ -218,5 +218,10 @@ public class UserService {
 
     private static Map<Integer, UserDTO> realUserMap = new HashMap<>(userMap);
 
+    public Map<Integer, UserDTO> getRealUserMap(){
+        return realUserMap;
+    }
+
+
 
 }

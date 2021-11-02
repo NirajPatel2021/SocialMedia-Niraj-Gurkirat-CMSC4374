@@ -11,7 +11,14 @@ import java.util.Map;
 @Service
 public class PostService {
 
-    Integer currentId = 3;
+    private final UserService userService;
+
+    public PostService(UserService userService) {
+
+        this.userService = userService;
+    }
+
+    Integer currentId = 11;
 
     public static Map<Integer, PostDTO> getAllPosts() {
         return realPostMap;
@@ -30,6 +37,9 @@ public class PostService {
         post.setId(currentId);
         System.out.println("Current ID: " + currentId);
         realPostMap.put(currentId, post);
+
+        int userId = post.getPostedBy();
+        userService.getRealUserMap().get(userId).getFeed().add(currentId);
         currentId += 1;
         return post;
     }

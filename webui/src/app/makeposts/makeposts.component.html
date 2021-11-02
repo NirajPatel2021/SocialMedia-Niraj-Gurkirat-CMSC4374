@@ -1,7 +1,34 @@
 Hello {{name}}
-<p>Write your posts here!</p>
 
-<form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:1})" method="post">
+
+<table class="table table-bordered table-striped display-5 text-primary table-hover">
+  <thead>
+  <tr>
+    <th>Post ID</th>
+    <th>Text</th>
+    <th>Time</th>
+    <th>Posted By ID</th>
+    <th>Posted By Name</th>
+
+
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr *ngFor="let post of friendsPosts">
+    <td class="table-danger"><span>{{post.id}}</span></td>
+    <td class="table-warning"><span>{{post.text}} </span></td>
+    <td class="table-warning"><span>{{post.time}} </span></td>
+    <td class="table-info"><span>{{post.postedByNum}}</span></td>
+    <td class="table-info"><span>{{post.postedByString}}</span></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<p>Write your posts here!</p>
+<form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:LoggedId})" method="post">
   <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/>
 
   <input type="submit" value="Post"/>
