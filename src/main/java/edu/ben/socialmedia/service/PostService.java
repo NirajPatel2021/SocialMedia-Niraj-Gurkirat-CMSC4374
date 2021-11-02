@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -50,6 +51,46 @@ public class PostService {
 //        post2.setTime(post1.getTime());
 //        can only update text
         return post2;
+    }
+
+    public void deletePost(Integer postId) {
+
+       // try {
+
+        realPostMap.remove(postId);
+        for (Integer key2 : userService.getRealUserMap().keySet()) {
+            if (userService.getRealUserMap().get(key2).getFeed().contains(postId)){
+                userService.getRealUserMap().get(key2).getFeed().remove(postId);
+            }
+        }
+
+//            for(Integer key : realPostMap.keySet()){
+//                realPostMap.get(key);
+//                if (realPostMap.get(key).getId() == postId){
+//
+//                    // Remove post from everyone's feed
+//                    for (Integer key2 : userService.getRealUserMap().keySet()){
+//                        List<Integer> userfeed = userService.getRealUserMap().get(key2).getFeed();
+//
+//                        //loop through feed and remove postId
+//                        for(int i = 0; i < userfeed.size(); i++){
+//                            if (userfeed.get(i) == postId){
+//                                userfeed.remove(i);
+//                            }
+//                        }
+//
+//                        //set users feed equal to new feed
+//                        userService.getRealUserMap().get(key2).setFeed(userfeed);
+//
+//                    }
+//
+//                    realPostMap.remove(key);
+//                    break;
+//                }
+//              }
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This post does not exist");
+//        }
     }
 
     private static Map<Integer, PostDTO> postMap = Map.of(

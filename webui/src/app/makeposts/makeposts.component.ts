@@ -52,7 +52,8 @@ export class MakepostsComponent implements OnInit {
 
   public createPost = (data: any) => {
     this.postService.createPost(data).subscribe((resp) => {
-      alert(JSON.stringify(resp));
+      //alert(JSON.stringify(resp));
+      this.getAllPosts()
     }, err => {
       alert(JSON.stringify(err));
     })
@@ -62,6 +63,17 @@ export class MakepostsComponent implements OnInit {
   public updatePost = (data: any) => {
     this.postService.updatePost(data).subscribe((resp) => {
       alert(JSON.stringify(resp));
+    }, err => {
+      alert(JSON.stringify(err));
+    })
+
+  }
+
+  public deletePost = (id: number) => {
+
+    this.postService.deletePost(id).subscribe(() => {
+      //alert("deleted");
+      this.getAllPosts();
     }, err => {
       alert(JSON.stringify(err));
     })

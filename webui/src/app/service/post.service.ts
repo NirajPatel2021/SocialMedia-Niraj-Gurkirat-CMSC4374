@@ -25,6 +25,11 @@ export class PostService {
     return this.http.put<{id:number, text:string, time:string, postedBy:number}>(`api/post/updatePost`,data);
   }
 
+  public deletePost = (id:number): Observable<{}> => {
+    return this.http.delete(`api/post/deletePost/${id}`);
+  }
+
+
 
 
 }
