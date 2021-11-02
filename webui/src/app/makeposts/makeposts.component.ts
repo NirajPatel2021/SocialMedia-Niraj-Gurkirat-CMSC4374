@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from "../service/post.service";
 import {UserService} from "../service/user.service";
+import {Router} from "@angular/router";
+
 
 class users {
   constructor(
@@ -37,13 +39,12 @@ export class MakepostsComponent implements OnInit {
   friends: users[] = [];
   friendsPosts: post[] = [];
 
-  constructor(private postService: PostService, private userService: UserService) {
+  constructor(private postService: PostService, private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.findLoggedId()
     this.getAllPosts()
-
   }
 
   temptext: string = "post text";
@@ -53,11 +54,12 @@ export class MakepostsComponent implements OnInit {
   public createPost = (data: any) => {
     this.postService.createPost(data).subscribe((resp) => {
       //alert(JSON.stringify(resp));
-      this.getAllPosts()
+      this.friendsPosts = [];
+      this.getAllPosts();
+      this.router.navigate(['posts'])
     }, err => {
       alert(JSON.stringify(err));
     })
-
   }
 
   public updatePost = (data: any) => {
@@ -66,14 +68,12 @@ export class MakepostsComponent implements OnInit {
     }, err => {
       alert(JSON.stringify(err));
     })
-
   }
 
   public deletePost = (id: number) => {
 
     this.postService.deletePost(id).subscribe(() => {
       //alert("deleted");
-      this.getAllPosts();
     }, err => {
       alert(JSON.stringify(err));
     })
@@ -109,6 +109,22 @@ export class MakepostsComponent implements OnInit {
           }
         });
         i++;
+      }
+    });
+  }
+
+  getAllPosts2() {
+    this.postService.getAllPosts().subscribe(response => {
+      let i = 1;
+      while (i in response) {
+        let newpost = <post>({
+          id: response[i].id,
+          text: response[i].text,
+          time: response[i].time,
+          postedByNum: response[i].postedBy,
+        })
+        this.friendsPosts.push(newpost);
+        i++
       }
     });
   }

@@ -38,7 +38,11 @@ public class postResource {
     @PostMapping(value = "/createPost", consumes = "application/json", produces = "application/json")
     public PostDTO createPost(@RequestBody PostDTO post){
 
-        return this.postService.createPost(post);
+        PostDTO post2 = this.postService.createPost(post);
+
+        System.out.println(post2);
+
+        return post2;
     }
 
     @PutMapping(value = "/updatePost", consumes = "application/json", produces = "application/json")
