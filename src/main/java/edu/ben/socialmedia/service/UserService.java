@@ -15,8 +15,8 @@ public class UserService {
 
     int currentId = 11;
 
-//    static ArrayList<Integer> friends1 = new ArrayList<>(
-//            Arrays.asList(2, 4, 6, 8));
+    static ArrayList<Integer> friends1 = new ArrayList<>(
+            Arrays.asList(2, 4, 6, 8));
 //    static ArrayList<Integer> friends2 = new ArrayList<>(
 //            Arrays.asList(4, 6, 8, 10));
 //    static ArrayList<Integer> friends3 = new ArrayList<>(
@@ -203,7 +203,7 @@ public class UserService {
 
     private static Map<Integer, UserDTO> userMap = Map.of(
 
-            1, UserDTO.of(1, "luffy", "captain", feed1),
+            1, UserDTO.of(1, "luffy", "captain", friends1, feed1),
             2, UserDTO.of(2, "zoro", "1stmate", feed2),
             3, UserDTO.of(3, "nami", "navigator", feed3),
             4, UserDTO.of(4, "usopp", "blacksmith", feed4),

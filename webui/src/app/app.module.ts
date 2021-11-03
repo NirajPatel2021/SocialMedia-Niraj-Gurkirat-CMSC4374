@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { FriendsComponent } from './friends/friends.component';
 import { RequestsComponent } from './requests/requests.component';
 import {UsersComponent} from "./users/users.component";
+import { ViewfriendpageComponent } from './viewfriendpage/viewfriendpage.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {UsersComponent} from "./users/users.component";
     LoginComponent,
     FriendsComponent,
     RequestsComponent,
-    UsersComponent
+    UsersComponent,
+    ViewfriendpageComponent
 
 
   ],
