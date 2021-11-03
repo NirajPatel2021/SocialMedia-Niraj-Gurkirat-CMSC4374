@@ -1,0 +1,26 @@
+<br><p>This is {{friend}}'s page!<br>
+<br>
+<table class="table table-bordered table-striped display-5 text-primary table-hover">
+  <thead>
+  <tr>
+    <th>Post ID</th>
+    <th>Text</th>
+    <th>Time</th>
+    <th>Posted By ID</th>
+    <th>Posted By Name</th>
+    <th></th>
+    <th></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr *ngFor="let post of myPosts">
+    <td class="table-danger"><span>{{post.id}}</span></td>
+    <td class="table-warning"><span>{{post.text}} </span></td>
+    <td class="table-warning"><span>{{post.time}} </span></td>
+    <td class="table-info"><span>{{post.postedByNum}}</span></td>
+    <td class="table-info"><span>{{post.postedByString}}</span></td>
+  </tr>
+  </tbody>
+</table>
