@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
-import {HttpClient} from "@angular/common/http";
 
 class users {
   constructor(
@@ -22,17 +21,11 @@ class users {
 export class UsersComponent implements OnInit {
   title = 'User';
   name = sessionStorage.getItem('username')
-
-
-  users: users[] = [];
-
-
+  AllUsers: users[] = []
+  LoggedUser: users[] = []
   public user: { id: number, username: String, password: String, friends: [], feed: [] } | null = null
-  userId: number = 1;
-  public errorMessage: string = '';
-
-  // constructor(private userService: UserService) {
-  // }
+  userId: number = 1
+  public errorMessage: string = ''
 
   constructor(
     private userService: UserService
@@ -45,10 +38,7 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.userService.getAllUsers().subscribe(response => {
-      console.log("response");
-      console.log(response[1]);
-      console.log(response);
-      this.users = [];
+      this.AllUsers = [];
       let i = 1;
       while (i in response) {
         let newuser = <users>({
@@ -59,25 +49,18 @@ export class UsersComponent implements OnInit {
           feed: response[i].feed,
           requests: response[i].requests
         })
-        this.users.push(newuser);
+        if ((response[i].username === sessionStorage.getItem('username'))) {
+          this.LoggedUser.push(newuser)
+        } else {
+          this.AllUsers.push(newuser)
+        }
         i++;
       }
     });
   }
 
 
-  // public sendFriendRequest = (data:any) => {
-  //   this.userService.sendFriendRequest(data).subscribe((resp)=>{
-  //     alert(JSON.stringify(resp));
-  //   }, err=> {
-  //     alert(JSON.stringify(err));
-  //   })
-  //
-  // }
-
-
   public sendFriendRequest = (data: any) => {
-
     let LoggedId = 0;
     this.userService.getAllUsers().subscribe(response => {
       let i = 1;
@@ -88,7 +71,6 @@ export class UsersComponent implements OnInit {
         }
         i++;
       }
-
       this.userService.sendFriendRequest(LoggedId, data).subscribe(
         (resp) => {
           {
@@ -96,6 +78,49 @@ export class UsersComponent implements OnInit {
         })
     });
 
+    this.AllUsers = []
+    this.LoggedUser = []
+    setTimeout(() => this.getUsers(),100);
+
+
+
+  }
+
+  alreadyFriends = (id: number) => {
+    let myId = this.LoggedUser[0].id
+    let friends: [] = [];
+    for (let i = 0; i < this.AllUsers.length; i++) {
+      if (this.AllUsers[i].id === id) {
+        friends = this.AllUsers[i].friends
+        break;
+      }
+    }
+    for (let i = 0; i < friends.length; i++) {
+      if (myId == friends[i]) {
+        return true
+        break;
+      }
+    }
+    return false
+  }
+
+
+  alreadyRequested = (id: number) => {
+    let myId = this.LoggedUser[0].id
+    let requests: [] = [];
+    for (let i = 0; i < this.AllUsers.length; i++) {
+      if (this.AllUsers[i].id === id) {
+        requests = this.AllUsers[i].requests
+        break;
+      }
+    }
+    for (let i = 0; i < requests.length; i++) {
+      if (myId == requests[i]) {
+        return true
+        break;
+      }
+    }
+    return false
   }
 
 

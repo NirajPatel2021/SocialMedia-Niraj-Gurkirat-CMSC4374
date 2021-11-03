@@ -22,13 +22,9 @@ class users {
 export class RequestsComponent implements OnInit {
   title = 'Requests';
   name = sessionStorage.getItem('username')
-
-
   requests: users[] = [];
-
   LoggedUserName: string | null = null
   LoggedId: number = 1;
-
 
   constructor(
     private userService: UserService, private router: Router
@@ -38,16 +34,13 @@ export class RequestsComponent implements OnInit {
   ngOnInit(): void {
     this.LoggedUserName = sessionStorage.getItem("username")
     this.findLoggedId()
-    this.getUsers();
+    this.getRequests();
   }
 
-  getUsers() {
-
+  getRequests() {
     this.userService.getAllUsers().subscribe(response => {
-
       let j = 0;
       while (j in response[this.LoggedId].requests) {
-
         let newuser = <users>({
           id: response[response[this.LoggedId].requests[j]].id,
           username: response[response[this.LoggedId].requests[j]].username,
@@ -63,25 +56,20 @@ export class RequestsComponent implements OnInit {
   }
 
   findLoggedId() {
-
     this.userService.getAllUsers().subscribe(response => {
-
       let i = 1;
       while (i in response) {
         if (response[i].username === this.LoggedUserName) {
           this.LoggedId = response[i].id
           break;
         }
-
         i++;
       }
-
     });
   }
 
 
   public acceptRequest = (data: any) => {
-
     let LoggedId = 0;
     this.userService.getAllUsers().subscribe(response => {
       let i = 1;
@@ -92,20 +80,16 @@ export class RequestsComponent implements OnInit {
         }
         i++;
       }
-
       this.userService.acceptRequest(LoggedId, data).subscribe(
         (resp) => {
-          this.router.navigate([''])
-
           {
           }
         })
     });
-
+    this.refresh()
   }
 
   public denyRequest = (data: any) => {
-
     let LoggedId = 0;
     this.userService.getAllUsers().subscribe(response => {
 
@@ -117,16 +101,18 @@ export class RequestsComponent implements OnInit {
         }
         i++;
       }
-
       this.userService.denyRequest(LoggedId, data).subscribe(
         (resp) => {
-          this.router.navigate([''])
-
-
           {
           }
         })
     });
+    this.refresh()
+  }
 
+  private refresh() {
+    this.requests = []
+    this.findLoggedId()
+    this.getRequests()
   }
 }

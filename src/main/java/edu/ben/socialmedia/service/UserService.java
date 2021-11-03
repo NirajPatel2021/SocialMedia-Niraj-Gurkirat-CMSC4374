@@ -15,8 +15,8 @@ public class UserService {
 
     int currentId = 11;
 
-    static ArrayList<Integer> friends1 = new ArrayList<>(
-            Arrays.asList(2, 4, 6, 8));
+//    static ArrayList<Integer> friends1 = new ArrayList<>(
+//            Arrays.asList(2, 4, 6, 8));
 //    static ArrayList<Integer> friends2 = new ArrayList<>(
 //            Arrays.asList(4, 6, 8, 10));
 //    static ArrayList<Integer> friends3 = new ArrayList<>(
@@ -77,7 +77,6 @@ public class UserService {
         realUserMap.put(currentId, user);
         user.setId(currentId);
         currentId += 1;
-        System.out.println("Current ID: " + currentId);
         return user;
     }
 
@@ -85,28 +84,19 @@ public class UserService {
     // if so return id
     // if not return null
     public UserDTO checkCredentials(UserDTO user1) {
-        UserDTO userdto;
-//        System.out.println(realUserMap.size());
         for (int i = 1; i <= realUserMap.size(); i++) {
-//            System.out.println(i + "IIIIII");
-//            System.out.println(user1.toString() + "user 1");
             if (realUserMap.get(i).getUsername().equals(user1.getUsername())) {
                 if (realUserMap.get(i).getPassword().equals(user1.getPassword())) {
-//                    System.out.println("YES");
-
                     return realUserMap.get(i);
                 }
             }
         }
-
         return null;
     }
 
     public UserDTO sendFriendRequest(UserDTO user) {
         int id1 = Integer.parseInt(user.getUsername());
         int id2 = Integer.parseInt(user.getPassword());
-
-
         if (id1 != 0 && id2 != 0 && id1 != id2) {
             if (!realUserMap.get(id2).getRequests().contains(id1) &&
                     !realUserMap.get(id2).getFriends().contains(id1)) {
@@ -119,26 +109,18 @@ public class UserService {
     public UserDTO unFriend(UserDTO user) {
         int id1 = Integer.parseInt(user.getUsername());
         int id2 = Integer.parseInt(user.getPassword());
-
-
         if (realUserMap.get(id2).getFriends().contains(id1)) {
             realUserMap.get(id2).getFriends().remove(realUserMap.get(id2).getFriends().indexOf(id1));
         }
-
-
         if (realUserMap.get(id1).getFriends().contains(id2)) {
             realUserMap.get(id1).getFriends().remove(realUserMap.get(id1).getFriends().indexOf(id2));
         }
-
-
         return null;
     }
 
     public UserDTO acceptRequest(UserDTO user) {
-        System.out.println("Entered acceptRequest");
         int id1 = Integer.parseInt(user.getUsername());
         int id2 = Integer.parseInt(user.getPassword());
-
         if (!realUserMap.get(id2).getFriends().contains(id1)) {
             if (id2 != 0 && id1 != 0 && id1 != id2) {
                 realUserMap.get(id2).getFriends().add(id1);
@@ -147,63 +129,27 @@ public class UserService {
         if (realUserMap.get(id2).getRequests().contains(id1)) {
             realUserMap.get(id2).getRequests().remove(realUserMap.get(id2).getRequests().indexOf(id1));
         }
-
         if (!realUserMap.get(id1).getFriends().contains(id2)) {
             if (id2 != 0 && id1 != 0 && id1 != id2) {
                 realUserMap.get(id1).getFriends().add(id2);
             }
         }
-
         if (realUserMap.get(id1).getRequests().contains(id2)) {
             realUserMap.get(id1).getRequests().remove(realUserMap.get(id1).getRequests().indexOf(id2));
         }
-
         return null;
     }
 
-
     public UserDTO denyRequest(UserDTO user) {
-        System.out.println("Entered denyRequest");
         int id1 = Integer.parseInt(user.getUsername());
         int id2 = Integer.parseInt(user.getPassword());
-//       System.out.println("This is ID1 Loggedin - Sender - Clicker: " + id1);
-//       System.out.println("This is ID2: " + id2);
         realUserMap.get(id1).getRequests().remove(realUserMap.get(id1).getRequests().indexOf(id2));
         return null;
     }
 
-//    public UserDTO updateUser(UserDTO user1) {
-//        UserDTO user2 = realUserMap.get(user1.getId());
-//        user2.setUsername(user1.getUsername());
-//        user2.setPassword(user1.getPassword());
-//        return user2;
-//    }
-
-
-//    public UserDTO sendFriendRequest(int[] ids) {
-//        realUserMap.get(ids[0]).getRequests().add(ids[1]);
-//                return null;
-//    }
-
-//    private static Map<Integer, UserDTO> userMap = Map.of(
-//
-//            1, UserDTO.of(1, "luffy", "captain", friends1, feed1),
-//            2, UserDTO.of(2, "zoro", "1stmate", friends2, feed2),
-//            3, UserDTO.of(3, "nami", "navigator", friends3, feed3),
-//            4, UserDTO.of(4, "usopp", "blacksmith", friends4, feed4),
-//            5, UserDTO.of(5, "sanji", "cook", friends5, feed5),
-//            6, UserDTO.of(6, "chopper", "doctor", friends1, feed6),
-//            7, UserDTO.of(7, "robin", "scholor", friends2, feed7),
-//            8, UserDTO.of(8, "franky", "shipwright", friends3, feed8),
-//            9, UserDTO.of(9, "brook", "musician", friends4, feed9),
-//            10, UserDTO.of(10, "jimbei", "helmsman", friends5, feed10)
-//
-//    );
-
-
     private static Map<Integer, UserDTO> userMap = Map.of(
 
-            1, UserDTO.of(1, "luffy", "captain", friends1, feed1),
+            1, UserDTO.of(1, "luffy", "captain", feed1),
             2, UserDTO.of(2, "zoro", "1stmate", feed2),
             3, UserDTO.of(3, "nami", "navigator", feed3),
             4, UserDTO.of(4, "usopp", "blacksmith", feed4),
@@ -218,10 +164,8 @@ public class UserService {
 
     private static Map<Integer, UserDTO> realUserMap = new HashMap<>(userMap);
 
-    public Map<Integer, UserDTO> getRealUserMap(){
+    public Map<Integer, UserDTO> getRealUserMap() {
         return realUserMap;
     }
-
-
 
 }

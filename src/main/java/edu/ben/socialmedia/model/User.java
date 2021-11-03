@@ -1,7 +1,6 @@
 package edu.ben.socialmedia.model;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -12,7 +11,6 @@ public class User {
     private String password;
     private List<Integer> friends; // list of user id's that are friends
     private List<Integer> feed; // list of post id's, will include one's own posts and friends posts
-
 
     public static User of(){
         return new User();

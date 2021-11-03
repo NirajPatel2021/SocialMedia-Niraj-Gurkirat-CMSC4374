@@ -15,17 +15,6 @@ class users {
   }
 }
 
-class post {
-  constructor(
-    public id: number,
-    public text: string,
-    public time: string,
-    public postedByNum: number,
-    public postedByString: string
-  ) {
-  }
-}
-
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
@@ -34,14 +23,9 @@ class post {
 export class FriendsComponent implements OnInit {
   title = 'Friends';
   name = sessionStorage.getItem('username')
-
-
   friends: users[] = [];
-  friendsPosts: post[] = [];
-
-
   LoggedUserName: string | null = null
-  LoggedId: number = 745;
+  LoggedId: number = 0;
 
   constructor(
     private userService: UserService, private postService: PostService, private router: Router
@@ -51,12 +35,10 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
     this.LoggedUserName = sessionStorage.getItem("username")
     this.findLoggedId()
-    this.getUsers();
-    this.getAllPosts();
+    this.getFriends()
   }
 
-  getUsers() {
-
+  getFriends() {
     this.userService.getAllUsers().subscribe(response => {
       let j = 0;
       while (j in response[this.LoggedId].friends) {
@@ -69,57 +51,12 @@ export class FriendsComponent implements OnInit {
           requests: response[response[this.LoggedId].friends[j]].requests
         })
         this.friends.push(newuser);
-
         j++
       }
     });
   }
 
-  getAllPosts() {
-    this.postService.getAllPosts().subscribe(response => {
-
-      let postedBy: number = 1;
-      let username: string = "";
-      let i = 1;
-      while (i in response) {
-
-        let idTemp: number = response[i].id
-        let textTemp: string = response[i].text
-        let timeTemp: string = response[i].time
-        let postedByNumTemp: number = response[i].postedBy
-        postedBy = response[i].postedBy
-        this.userService.getUser(postedBy).subscribe(response => {
-          username = response.username
-
-          let newpost = <post>({
-              id: idTemp,
-              text: textTemp,
-              time: timeTemp,
-              postedByNum: postedByNumTemp,
-              postedByString: username
-            }
-          )
-
-          let isValidPost = false
-          let k = 0
-          while (k in this.friends) {
-            if (this.friends[k].username === username) {
-              isValidPost = true;
-            }
-            k++
-          }
-          if (isValidPost) {
-            this.friendsPosts.push(newpost);
-          }
-        });
-        i++;
-      }
-    });
-  }
-
-
   public unFriend = (data: any) => {
-
     let LoggedId = 0;
     this.userService.getAllUsers().subscribe(response => {
       let i = 1;
@@ -130,21 +67,16 @@ export class FriendsComponent implements OnInit {
         }
         i++;
       }
-
       this.userService.unFriend(LoggedId, data).subscribe(
         (resp) => {
           {
-            this.router.navigate([''])
-
           }
         })
     });
-
+    this.refresh()
   }
 
-
   findLoggedId() {
-
     this.userService.getAllUsers().subscribe(response => {
       let i = 1;
       while (i in response) {
@@ -157,5 +89,9 @@ export class FriendsComponent implements OnInit {
     });
   }
 
-
+  private refresh() {
+    this.friends = []
+    this.findLoggedId()
+    this.getFriends()
+  }
 }
