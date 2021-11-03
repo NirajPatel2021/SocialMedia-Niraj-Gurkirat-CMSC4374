@@ -36,8 +36,7 @@ export class MakepostsComponent implements OnInit {
   title = "Posts"
   name = sessionStorage.getItem('username')
 
-  friends: users[] = [];
-  friendsPosts: post[] = [];
+  myPosts: post[] = [];
 
   constructor(private postService: PostService, private userService: UserService, private router: Router) {
   }
@@ -54,7 +53,7 @@ export class MakepostsComponent implements OnInit {
   public createPost = (data: any) => {
     this.postService.createPost(data).subscribe((resp) => {
       //alert(JSON.stringify(resp));
-      this.friendsPosts = [];
+      this.myPosts = [];
       this.getAllPosts();
       this.router.navigate(['posts'])
     }, err => {
@@ -72,44 +71,44 @@ export class MakepostsComponent implements OnInit {
 
   public deletePost = (id: number) => {
 
+
     this.postService.deletePost(id).subscribe(() => {
       //alert("deleted");
     }, err => {
       alert(JSON.stringify(err));
     })
 
+    this.myPosts = [];
+    this.getAllPosts();
+
   }
 
   getAllPosts() {
-    this.postService.getAllPosts().subscribe(response => {
-
-      let postedBy: number = 1;
-      let username: string = "";
+    let LoginID = 0
+    this.userService.getAllUsers().subscribe(response => {
       let i = 1;
       while (i in response) {
-
-        let idTemp: number = response[i].id
-        let textTemp: string = response[i].text
-        let timeTemp: string = response[i].time
-        let postedByNumTemp: number = response[i].postedBy
-        postedBy = response[i].postedBy
-        this.userService.getUser(postedBy).subscribe(response => {
-          username = response.username
-          let newpost = <post>({
-              id: idTemp,
-              text: textTemp,
-              time: timeTemp,
-              postedByNum: postedByNumTemp,
-              postedByString: username
-            }
-          )
-
-          if (newpost.postedByString === sessionStorage.getItem('username')) {
-            this.friendsPosts.push(newpost);
-          }
-        });
+        if (response[i].username === sessionStorage.getItem('username')) {
+          LoginID = response[i].id
+          break;
+        }
         i++;
       }
+      this.userService.getUser(LoginID).subscribe(response => {
+        let myFeed = response.feed
+        for (let i = 0; i < myFeed.length; i++) {
+          this.postService.getPost(myFeed[i]).subscribe(response => {
+            let newpost = <post>({
+              id: response.id,
+              text: response.text,
+              time: response.time,
+              postedByNum: response.postedBy,
+              postedByString: this.name
+            })
+            this.myPosts.push(newpost)
+          });
+        }
+      });
     });
   }
 
@@ -123,20 +122,18 @@ export class MakepostsComponent implements OnInit {
           time: response[i].time,
           postedByNum: response[i].postedBy,
         })
-        this.friendsPosts.push(newpost);
+        this.myPosts.push(newpost);
         i++
       }
     });
   }
 
-
   findLoggedId() {
-    this.userService.getAllUsers().subscribe(response => {
-      let CurrentUsername = sessionStorage.getItem('username')
 
+    this.userService.getAllUsers().subscribe(response => {
       let i = 1;
       while (i in response) {
-        if (response[i].username === CurrentUsername) {
+        if (response[i].username === sessionStorage.getItem('username')) {
           this.LoggedId = response[i].id
           break;
         }
@@ -144,5 +141,6 @@ export class MakepostsComponent implements OnInit {
       }
     });
   }
+
 
 }

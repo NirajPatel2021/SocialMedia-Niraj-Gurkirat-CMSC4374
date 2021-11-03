@@ -57,7 +57,7 @@ public class PostService {
 
        // try {
 
-        realPostMap.remove(postId);
+//        realPostMap.remove(postId);
         for (Integer key2 : userService.getRealUserMap().keySet()) {
             if (userService.getRealUserMap().get(key2).getFeed().contains(postId)){
                 userService.getRealUserMap().get(key2).getFeed().remove(postId);
