@@ -50,6 +50,8 @@ export class MakepostsComponent implements OnInit {
   temptime: string = new Date().toString();
   LoggedId: number = 0;
 
+  edittext: string = "edit text";
+
   public createPost = (data: any) => {
     this.postService.createPost(data).subscribe((resp) => {
       //alert(JSON.stringify(resp));
@@ -63,10 +65,13 @@ export class MakepostsComponent implements OnInit {
 
   public updatePost = (data: any) => {
     this.postService.updatePost(data).subscribe((resp) => {
-      alert(JSON.stringify(resp));
+      //alert(JSON.stringify(resp));
     }, err => {
       alert(JSON.stringify(err));
     })
+
+    this.myPosts = [];
+    this.getAllPosts();
   }
 
   public deletePost = (id: number) => {
