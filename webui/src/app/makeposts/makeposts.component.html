@@ -16,15 +16,19 @@ Hello {{name}}
   </thead>
   <tbody>
   <tr>
+
   <tr *ngFor="let post of myPosts">
     <td class="table-danger"><span>{{post.id}}</span></td>
-    <td class="table-warning"><span>{{post.text}} </span></td>
+    <td class="table-warning">
+      <span>{{post.text}} </span>
+<!--      <input id="{{post.id}}" value="{{post.text}}" [(ngModel)]="edittext"/>-->
+    </td>
     <td class="table-warning"><span>{{post.time}} </span></td>
     <td class="table-info"><span>{{post.postedByNum}}</span></td>
     <td class="table-info"><span>{{post.postedByString}}</span></td>
     <td>
-      <button class="card card-small" (click)="updatePost(post.id)" tabindex="0">
-        <span>Edit</span>
+      <button class="card card-small" (click)="updatePost({id: post.id,text: edittext,time: post.time,postedBy: post.postedByNum})" tabindex="0">
+        <span>Update</span>
       </button>
     </td>
     <td>
@@ -43,3 +47,8 @@ Hello {{name}}
 
   <input type="submit" value="Post"/>
 </form>
+
+<br/>
+<p>Edit Post Box</p>
+<input [(ngModel)]="edittext"/>
+<p>Click update post next to the post you want to update with this text.</p>

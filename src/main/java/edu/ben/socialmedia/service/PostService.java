@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -46,11 +45,14 @@ public class PostService {
     }
 
     public PostDTO updatePost(PostDTO post1) {
-        PostDTO post2 = realPostMap.get(post1.getId());
-        post2.setText(post1.getText());
+//        PostDTO post2 = realPostMap.get(post1.getId());
+//        post2.setText(post1.getText());
 //        post2.setTime(post1.getTime());
 //        can only update text
-        return post2;
+
+        realPostMap.get(post1.getId()).setText(post1.getText());
+        System.out.println(realPostMap.get(post1.getId()));
+        return realPostMap.get(post1.getId());
     }
 
     public void deletePost(Integer postId) {
