@@ -1,6 +1,5 @@
 package edu.ben.socialmedia.model.dto;
 
-import edu.ben.socialmedia.model.Post;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +12,6 @@ public class PostDTO {
     private String text;
     private String time;
     private int postedBy; // user id
-
-    // can add later
-//  private List<int> likedBy; // user id’s
-//  private List<int> dislikedBy;  //  user id’s
 
     public static PostDTO of(){
         return new PostDTO();
@@ -35,5 +30,4 @@ public class PostDTO {
         result.setPostedBy(postedBy);
         return result;
     }
-
 }

@@ -1,6 +1,4 @@
 Hello {{name}}
-
-
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
@@ -14,19 +12,26 @@ Hello {{name}}
   </thead>
   <tbody>
   <tr>
-  <tr  *ngFor="let user of users" >
+  <tr  *ngFor="let user of AllUsers" >
     <td class="table-danger"><span>{{user.id}}</span></td>
     <td class="table-warning"><span>{{user.username}} </span></td>
     <td class="table-success"><span>{{user.password}}</span></td>
     <td class="table-info"><span>{{user.friends}}</span></td>
     <td class="table-info"><span>{{user.feed}}</span></td>
     <td class="table-info"><span>{{user.requests}}</span></td>
-    <button class="card card-small" (click)="sendFriendRequest(user.id)" tabindex="0">
-      <span>Send Friend Request!</span>
-    </button>
-
-
+    <div *ngIf="(!alreadyFriends(user.id) && (!alreadyRequested((user.id))))">
+      <button class="card card-small" (click)="sendFriendRequest(user.id)" tabindex="0">
+        <span>Send Friend Request!</span>
+      </button>
+    </div>
+    <div *ngIf="(alreadyFriends(user.id))">
+        <span>Already Friends!</span>
+    </div>
+    <div *ngIf="(alreadyRequested(user.id))">
+      <span>Awaiting Response!</span>
+    </div>
   </tr>
   </tbody>
 </table>
+
 

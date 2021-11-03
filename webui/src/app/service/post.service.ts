@@ -29,7 +29,4 @@ export class PostService {
     return this.http.delete(`api/post/deletePost/${id}`);
   }
 
-
-
-
 }

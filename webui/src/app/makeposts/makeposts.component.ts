@@ -4,18 +4,6 @@ import {UserService} from "../service/user.service";
 import {Router} from "@angular/router";
 
 
-class users {
-  constructor(
-    public id: number,
-    public username: string,
-    public password: string,
-    public friends: [],
-    public feed: [],
-    public requests: []
-  ) {
-  }
-}
-
 class post {
   constructor(
     public id: number,
@@ -35,7 +23,6 @@ class post {
 export class MakepostsComponent implements OnInit {
   title = "Posts"
   name = sessionStorage.getItem('username')
-
   myPosts: post[] = [];
 
   constructor(private postService: PostService, private userService: UserService, private router: Router) {
@@ -47,45 +34,36 @@ export class MakepostsComponent implements OnInit {
   }
 
   temptext: string = "post text";
-  temptime: string = new Date().toString();
-  LoggedId: number = 0;
-
+  temptime: string = new Date().toLocaleString()
   edittext: string = "edit text";
+  LoggedId: number = 0;
 
   public createPost = (data: any) => {
     this.postService.createPost(data).subscribe((resp) => {
-      //alert(JSON.stringify(resp));
-      this.myPosts = [];
-      this.getAllPosts();
       this.router.navigate(['posts'])
     }, err => {
       alert(JSON.stringify(err));
     })
+    this.myPosts = [];
+    this.getAllPosts();
   }
 
   public updatePost = (data: any) => {
     this.postService.updatePost(data).subscribe((resp) => {
-      //alert(JSON.stringify(resp));
     }, err => {
       alert(JSON.stringify(err));
     })
-
-    this.myPosts = [];
-    this.getAllPosts();
+    this.myPosts = []
+    this.getAllPosts()
   }
 
   public deletePost = (id: number) => {
-
-
     this.postService.deletePost(id).subscribe(() => {
-      //alert("deleted");
     }, err => {
       alert(JSON.stringify(err));
     })
-
-    this.myPosts = [];
-    this.getAllPosts();
-
+    this.myPosts = []
+    this.getAllPosts()
   }
 
   getAllPosts() {
@@ -117,24 +95,7 @@ export class MakepostsComponent implements OnInit {
     });
   }
 
-  getAllPosts2() {
-    this.postService.getAllPosts().subscribe(response => {
-      let i = 1;
-      while (i in response) {
-        let newpost = <post>({
-          id: response[i].id,
-          text: response[i].text,
-          time: response[i].time,
-          postedByNum: response[i].postedBy,
-        })
-        this.myPosts.push(newpost);
-        i++
-      }
-    });
-  }
-
   findLoggedId() {
-
     this.userService.getAllUsers().subscribe(response => {
       let i = 1;
       while (i in response) {

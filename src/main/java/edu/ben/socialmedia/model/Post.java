@@ -2,8 +2,6 @@ package edu.ben.socialmedia.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class Post {
 
@@ -11,10 +9,6 @@ public class Post {
     private String text;
     private String time;
     private Long postedBy; // user id
-
-    // can add later
-//  private List<Long> likedBy; // user id’s
-//  private List<Long> dislikedBy;  //  user id’s
 
     public static Post of(){
         return new Post();
@@ -33,6 +27,4 @@ public class Post {
         result.setPostedBy(postedBy);
         return result;
     }
-
-
 }

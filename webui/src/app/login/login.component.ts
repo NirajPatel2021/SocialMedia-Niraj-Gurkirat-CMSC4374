@@ -21,31 +21,16 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   checkLogin() {
-
     this.authService.authenticateWithBackend(this.username, this.password).subscribe(
       (resp) => {
         if (resp.username !== "null") {
           this.router.navigate([''])
           this.authService.authenticated = true;
           sessionStorage.setItem('username', this.username)
-          console.log("Logged In - Username: " + sessionStorage.getItem("username"))
         } else {
           alert("Invalid Credentials");
           this.authService.authenticated = false;
         }
       })
-
-
-    //   if (this.authService.authenticate(this.username, this.password))
-    //   {
-    //     this.router.navigate([''])
-    //     this.authService.authenticated = true;
-    //     console.log("Logged In - Username: " + sessionStorage.getItem("username"))
-    //   }
-    //   else
-    //     this.authService.authenticated = false;
-    // }
   }
-
-
 }
