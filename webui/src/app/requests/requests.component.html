@@ -11,10 +11,10 @@ These are all your pending friend requests!
   <tr>
   <tr  *ngFor="let request of requests" >
     <td class="table-warning"><span>{{request.username | titlecase }} </span></td>
-    <button class="card card-small" (click)="acceptRequest(request.id)" tabindex="0">
+    <button style="margin:5px; display: inline-block" class="btn btn-success" (click)="acceptRequest(request.id)" tabindex="0">
       <span>Accept Request!</span>
     </button>
-    <button class="card card-small" (click)="denyRequest(request.id)" tabindex="0">
+    <button style="margin:5px; display: inline-block" class="btn btn-danger" (click)="denyRequest(request.id)" tabindex="0">
       <span>Deny Request!</span>
     </button>
   </tr>

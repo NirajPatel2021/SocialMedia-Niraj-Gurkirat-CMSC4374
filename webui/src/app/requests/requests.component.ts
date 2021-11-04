@@ -86,8 +86,9 @@ export class RequestsComponent implements OnInit {
           }
         })
     });
-    this.refresh()
+    setTimeout(() => this.refresh(),2000);
   }
+
 
   public denyRequest = (data: any) => {
     let LoggedId = 0;
@@ -107,7 +108,7 @@ export class RequestsComponent implements OnInit {
           }
         })
     });
-    this.refresh()
+    setTimeout(() => this.refresh(),2000);
   }
 
   private refresh() {

@@ -18,12 +18,12 @@ These are all your posts!
     </td>
     <td class="table-warning"><span>{{post.time}} </span></td>
     <td>
-      <button class="card card-small" (click)="updatePost({id: post.id,text: edittext,time: post.time,postedBy: post.postedByNum})" tabindex="0">
+      <button style="margin:5px; display: inline-block" class="btn btn-success" (click)="updatePost({id: post.id,text: edittext,time: post.time,postedBy: post.postedByNum})" tabindex="0">
         <span>Update</span>
       </button>
     </td>
     <td>
-      <button class="card card-small" (click)="deletePost(post.id)" tabindex="0">
+      <button style="margin:5px; display: inline-block" class="btn btn-danger" (click)="deletePost(post.id)" tabindex="0">
         <span>Delete</span>
       </button>
     </td>
@@ -31,13 +31,21 @@ These are all your posts!
   </tbody>
 </table>
 
-<p>Write your posts here!</p>
-<form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:LoggedId})" method="post">
-  <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/> <br><br>
-  <input type="submit" value="Post"/>
-</form>
+<div class="row">
+  <div class="column" style="margin: 20px; width: 40%;" >
 
-<br/><br><br>
-<p>Edit Post Box</p>
-<input [(ngModel)]="edittext"/> <br><br>
-<p>Click update post next to the post you want to update with this text.</p>
+    <p>Write your posts here!</p>
+    <form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:LoggedId})" method="post">
+      <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/> <br><br>
+      <input style="margin:5px; display: inline-block" class="btn btn-success" type="submit" value="Post"/>
+    </form>
+
+  </div>
+  <div class="column" style="margin: 20px; width: 40%;">
+
+    <p>Edit Post Box</p>
+    <input [(ngModel)]="edittext"/> <br><br>
+    <p>Click update post next to the post you want to update with this text.</p>
+
+  </div>
+</div>

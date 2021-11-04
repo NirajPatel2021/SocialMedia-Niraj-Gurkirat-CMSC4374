@@ -11,10 +11,10 @@ These are all your friends!
   <tr>
   <tr *ngFor="let friend of friends">
     <td class="table-warning"><span>{{friend.username | titlecase }} </span></td>
-    <button class="card card-small" (click)="unFriend(friend.id)" tabindex="0">
+    <button style="margin:5px; display: inline-block" class="btn btn-danger" (click)="unFriend(friend.id)" tabindex="0">
       <span>UnFriend!</span>
     </button>
-    <button class="card card-small" [routerLink]="['/friendPage', friend.id]" tabindex="0">
+    <button style="margin:5px; display: inline-block" class="btn btn-success" [routerLink]="['/friendPage', friend.id]" tabindex="0">
       <span>Visit!</span>
     </button>
   </tr>

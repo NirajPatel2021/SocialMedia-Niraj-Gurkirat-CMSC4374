@@ -12,7 +12,7 @@ These are all the current users of PirateBook!
   <tr  *ngFor="let user of AllUsers" >
     <td class="table-warning"><span>{{user.username | titlecase }} </span></td>
     <div *ngIf="(!alreadyFriends(user.id) && (!alreadyRequested((user.id))))">
-      <button class="card card-small" (click)="sendFriendRequest(user.id)" tabindex="0">
+      <button style="margin:5px; display: inline-block" class="btn btn-success" (click)="sendFriendRequest(user.id)" tabindex="0">
         <span>Send Friend Request!</span>
       </button>
     </div>
