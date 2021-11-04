@@ -39,6 +39,7 @@ export class MakepostsComponent implements OnInit {
   LoggedId: number = 0;
 
   public createPost = (data: any) => {
+    this.temptime = new Date().toLocaleString()
     this.postService.createPost(data).subscribe((resp) => {
       this.router.navigate(['posts'])
     }, err => {
