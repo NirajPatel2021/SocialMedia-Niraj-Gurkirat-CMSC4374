@@ -20,9 +20,9 @@ export class SignupComponent implements OnInit {
   public createUser = (data: any) => {
     this.userService.createUser(data).subscribe((resp) => {
         if (resp == null) {
-          alert("Account Creation Fail - Username Already Exists!");
+          alert("Account Creation Fail! - Username Already Exists!");
         } else {
-          alert("Account Created");
+          alert("Account Created!");
         }
       },
     )
