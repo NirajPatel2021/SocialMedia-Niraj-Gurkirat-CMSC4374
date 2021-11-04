@@ -10,8 +10,8 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  public getUser = (id: number): Observable<{ id: number, username: string, password: string, friends: [], feed: [] }> => {
-    return this.http.get<{ id: number, username: string, password: string, friends: [], feed: [] }>(`api/user/${id}`);
+  public getUser = (id: number): Observable<{ id: number, username: string, password: string, friends: [], feed: [], requests:[] }> => {
+    return this.http.get<{ id: number, username: string, password: string, friends: [], feed: [], requests:[]  }>(`api/user/${id}`);
   }
 
 

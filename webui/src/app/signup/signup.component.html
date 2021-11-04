@@ -1,7 +1,7 @@
 <br><p>Sign Up Here</p><br>
 <form (submit)="createUser({username:tempusername,password:temppassword})" method="post">
-  <input type="text" name="username" placeholder="username" [(ngModel)]="tempusername"/>
-  <input type="text" name="password" placeholder="password" [(ngModel)]="temppassword"/>
+  User Name: <input type="text" name="username" placeholder="username" [(ngModel)]="tempusername"/> <br><br>
+  Password: <input type="text" name="password" placeholder="password" [(ngModel)]="temppassword"/> <br><br>
   <input type="submit" class="btn btn-success" value="Submit"/>
 </form>
 
