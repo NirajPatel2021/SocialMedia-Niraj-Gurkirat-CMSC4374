@@ -33,9 +33,9 @@ export class MakepostsComponent implements OnInit {
     this.getAllPosts()
   }
 
-  temptext: string = "post text";
+  temptext: string = "Post Text";
   temptime: string = new Date().toLocaleString()
-  edittext: string = "edit text";
+  edittext: string = "Edit Text";
   LoggedId: number = 0;
 
   public createPost = (data: any) => {

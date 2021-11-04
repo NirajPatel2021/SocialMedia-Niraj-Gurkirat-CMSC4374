@@ -1,16 +1,16 @@
-Hello {{name}}
+Hello {{name | titlecase }}
+<br>
+These are all your pending friend requests!
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
-    <th >ID</th>
     <th>User Name</th>
   </tr>
   </thead>
   <tbody>
   <tr>
   <tr  *ngFor="let request of requests" >
-    <td class="table-danger"><span>{{request.id}}</span></td>
-    <td class="table-warning"><span>{{request.username}} </span></td>
+    <td class="table-warning"><span>{{request.username | titlecase }} </span></td>
     <button class="card card-small" (click)="acceptRequest(request.id)" tabindex="0">
       <span>Accept Request!</span>
     </button>

@@ -1,12 +1,11 @@
-Hello {{name}}
+Hello {{name | titlecase }}
+<br>
+These are all your posts!
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
-    <th>Post ID</th>
     <th>Text</th>
     <th>Time</th>
-    <th>Posted By ID</th>
-    <th>Posted By Name</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,13 +13,10 @@ Hello {{name}}
   <tbody>
   <tr>
   <tr *ngFor="let post of myPosts">
-    <td class="table-danger"><span>{{post.id}}</span></td>
     <td class="table-warning">
       <span>{{post.text}} </span>
     </td>
     <td class="table-warning"><span>{{post.time}} </span></td>
-    <td class="table-info"><span>{{post.postedByNum}}</span></td>
-    <td class="table-info"><span>{{post.postedByString}}</span></td>
     <td>
       <button class="card card-small" (click)="updatePost({id: post.id,text: edittext,time: post.time,postedBy: post.postedByNum})" tabindex="0">
         <span>Update</span>
@@ -37,12 +33,11 @@ Hello {{name}}
 
 <p>Write your posts here!</p>
 <form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:LoggedId})" method="post">
-  <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/>
-
+  <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/> <br><br>
   <input type="submit" value="Post"/>
 </form>
 
-<br/>
+<br/><br><br>
 <p>Edit Post Box</p>
-<input [(ngModel)]="edittext"/>
+<input [(ngModel)]="edittext"/> <br><br>
 <p>Click update post next to the post you want to update with this text.</p>

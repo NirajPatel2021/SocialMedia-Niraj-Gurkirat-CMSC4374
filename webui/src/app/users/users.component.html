@@ -1,34 +1,26 @@
-Hello {{name}}
+Hello {{name | titlecase }}
+<br>
+These are all the current users of PirateBook!
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
-    <th >ID</th>
     <th>User Name</th>
-    <th>Password</th>
-    <th>Friends</th>
-    <th>Feed</th>
-    <th>Requests</th>
   </tr>
   </thead>
   <tbody>
   <tr>
   <tr  *ngFor="let user of AllUsers" >
-    <td class="table-danger"><span>{{user.id}}</span></td>
-    <td class="table-warning"><span>{{user.username}} </span></td>
-    <td class="table-success"><span>{{user.password}}</span></td>
-    <td class="table-info"><span>{{user.friends}}</span></td>
-    <td class="table-info"><span>{{user.feed}}</span></td>
-    <td class="table-info"><span>{{user.requests}}</span></td>
+    <td class="table-warning"><span>{{user.username | titlecase }} </span></td>
     <div *ngIf="(!alreadyFriends(user.id) && (!alreadyRequested((user.id))))">
       <button class="card card-small" (click)="sendFriendRequest(user.id)" tabindex="0">
         <span>Send Friend Request!</span>
       </button>
     </div>
     <div *ngIf="(alreadyFriends(user.id))">
-        <span>Already Friends!</span>
+        <span style="color:MediumSeaGreen;">Already Friends!</span>
     </div>
     <div *ngIf="(alreadyRequested(user.id))">
-      <span>Awaiting Response!</span>
+      <span style="color:DodgerBlue;">Awaiting Response!</span>
     </div>
   </tr>
   </tbody>

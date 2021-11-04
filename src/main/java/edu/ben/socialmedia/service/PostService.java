@@ -58,7 +58,7 @@ public class PostService {
 
     private static Map<Integer, PostDTO> postMap = Map.of(
             1, PostDTO.of(1, "Where's my meat?", "11/3/2021, 1:01:01 PM", 1),
-            2, PostDTO.of(2, "Where am I going?", "11/3/2021, 2:02:02 PM", 2),
+            2, PostDTO.of(2, "Where am I?", "11/3/2021, 2:02:02 PM", 2),
             3, PostDTO.of(3, "Where's my money?", "11/3/2021, 3:03:03 PM", 3),
             4, PostDTO.of(4, "Where's is the hideout?", "11/3/2021, 4:04:04 PM", 4),
             5, PostDTO.of(5, "Where are my ingredients?", "11/3/2021, 5:05:05 PM", 5),

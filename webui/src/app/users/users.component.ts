@@ -80,7 +80,7 @@ export class UsersComponent implements OnInit {
 
     this.AllUsers = []
     this.LoggedUser = []
-    setTimeout(() => this.getUsers(),100);
+    setTimeout(() => this.getUsers(),500);
 
 
 

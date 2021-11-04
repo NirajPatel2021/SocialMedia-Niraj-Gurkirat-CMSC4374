@@ -3,6 +3,17 @@ import {UserService} from "../service/user.service";
 import {PostService} from "../service/post.service";
 import {ActivatedRoute} from "@angular/router";
 
+class post {
+  constructor(
+    public id: number,
+    public text: string,
+    public time: string,
+    public postedByNum: number,
+    public postedByString: string
+  ) {
+  }
+}
+
 class users {
   constructor(
     public id: number,
@@ -15,17 +26,6 @@ class users {
   }
 }
 
-class post {
-  constructor(
-    public id: number,
-    public text: string,
-    public time: string,
-    public postedByNum: number,
-    public postedByString: string
-  ) {
-  }
-}
-
 @Component({
   selector: 'app-viewfriendpage',
   templateUrl: './viewfriendpage.component.html',
@@ -34,11 +34,9 @@ class post {
 export class ViewfriendpageComponent implements OnInit {
 
   public friend: any = {}
-  // name = sessionStorage.getItem('username')
-
-  myPosts: post[] = [];
-  friendId: number = 0;
-
+  friendPosts: post[] = []
+  friendFriends: users[] = []
+  friendId: number = 0
 
   constructor(private userService: UserService, private postService: PostService, private route: ActivatedRoute) {
   }
@@ -47,7 +45,7 @@ export class ViewfriendpageComponent implements OnInit {
     this.friendId = Number(this.route.snapshot.paramMap.get(('id')))
     this.getFriendName()
     this.getFriendPosts()
-
+    this.getFriendFriends()
   }
 
   private getFriendName = () => {
@@ -56,9 +54,7 @@ export class ViewfriendpageComponent implements OnInit {
     });
   }
 
-
   getFriendPosts() {
-
     this.userService.getUser(this.friendId).subscribe(response => {
       let myFeed = response.feed
       for (let i = 0; i < myFeed.length; i++) {
@@ -68,12 +64,35 @@ export class ViewfriendpageComponent implements OnInit {
             text: response.text,
             time: response.time,
             postedByNum: response.postedBy,
-            // postedByString: this.name
           })
-          this.myPosts.push(newpost)
+          this.friendPosts.push(newpost)
         });
       }
     });
-
   }
+
+
+  getFriendFriends() {
+    this.userService.getUser(this.friendId).subscribe(response => {
+      let myFriends = response.friends
+      for (let i = 0; i < myFriends.length; i++) {
+        this.userService.getUser(myFriends[i]).subscribe(response => {
+          let newuser = <users>({
+            id: response.id,
+            username: response.username,
+            password: response.password,
+            friends: response.friends,
+            feed: response.feed,
+            requests: response.requests
+          })
+          this.friendFriends.push(newuser)
+        });
+      }
+    });
+  }
+
+
+
+
+
 }

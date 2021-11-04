@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.authService.authenticateWithBackend(this.username, this.password).subscribe(
       (resp) => {
         if (resp.username !== "null") {
-          this.router.navigate([''])
+          this.router.navigate(['friends'])
           this.authService.authenticated = true;
           sessionStorage.setItem('username', this.username)
         } else {
