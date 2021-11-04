@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
 
 @Component({
@@ -9,21 +8,24 @@ import {UserService} from "../service/user.service";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
   }
 
-  tempusername:string = "ClarkKent";
-  temppassword:string = "Superman";
+  tempusername: string = "ClarkKent";
+  temppassword: string = "Superman";
 
-  public createUser = (data:any) => {
-    this.userService.createUser(data).subscribe((resp)=>{
-      alert("Account Created");
-    }, err=> {
-      alert(JSON.stringify(err));
-    })
-
+  public createUser = (data: any) => {
+    this.userService.createUser(data).subscribe((resp) => {
+        if (resp == null) {
+          alert("Account Creation Fail - Username Already Exists!");
+        } else {
+          alert("Account Created");
+        }
+      },
+    )
   }
 
 }

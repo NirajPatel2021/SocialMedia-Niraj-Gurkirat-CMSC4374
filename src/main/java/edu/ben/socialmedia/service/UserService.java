@@ -73,6 +73,15 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO user) {
+
+        String username1 = user.getUsername();
+        for (int i = 1; i <= this.getRealUserMap().size(); i++) {
+            String username2 = getRealUserMap().get(i).getUsername();
+            if (username1.equals(username2)) {
+                return null;
+            }
+        }
+
         user.setId(currentId);
         realUserMap.put(currentId, user);
         user.setId(currentId);
