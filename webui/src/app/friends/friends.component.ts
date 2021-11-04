@@ -35,6 +35,7 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
     this.LoggedUserName = sessionStorage.getItem("username")
     this.findLoggedId()
+    setTimeout(() => 2000);
     this.getFriends()
   }
 
@@ -73,6 +74,7 @@ export class FriendsComponent implements OnInit {
           }
         })
     });
+    setTimeout(() => 2000);
     this.refresh()
   }
 

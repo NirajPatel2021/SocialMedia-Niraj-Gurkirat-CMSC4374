@@ -86,7 +86,9 @@ export class RequestsComponent implements OnInit {
           }
         })
     });
-    setTimeout(() => this.refresh(),2000);
+    // setTimeout(() => this.refresh(),2000);
+    setTimeout(() => 2000);
+    this.refresh()
   }
 
 
@@ -108,7 +110,8 @@ export class RequestsComponent implements OnInit {
           }
         })
     });
-    setTimeout(() => this.refresh(),2000);
+    setTimeout(() => 2000);
+    this.refresh()
   }
 
   private refresh() {

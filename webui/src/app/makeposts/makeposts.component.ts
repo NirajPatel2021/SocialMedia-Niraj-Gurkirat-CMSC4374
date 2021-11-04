@@ -44,6 +44,7 @@ export class MakepostsComponent implements OnInit {
     }, err => {
       alert(JSON.stringify(err));
     })
+    setTimeout(() => 2000);
     this.myPosts = [];
     this.getAllPosts();
   }
@@ -53,6 +54,7 @@ export class MakepostsComponent implements OnInit {
     }, err => {
       alert(JSON.stringify(err));
     })
+    setTimeout(() => 2000);
     this.myPosts = []
     this.getAllPosts()
   }
@@ -62,6 +64,7 @@ export class MakepostsComponent implements OnInit {
     }, err => {
       alert(JSON.stringify(err));
     })
+    setTimeout(() => 2000);
     this.myPosts = []
     this.getAllPosts()
   }
@@ -89,6 +92,7 @@ export class MakepostsComponent implements OnInit {
               postedByString: this.name
             })
             this.myPosts.push(newpost)
+            this.myPosts.sort()
           });
         }
       });

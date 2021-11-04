@@ -1,6 +1,9 @@
-Hello {{name | titlecase }}
 <br>
-These are all your posts!
+<p style="color:DodgerBlue; font-size: 30px;"> Hello {{name | titlecase }} </p>
+<br>
+<p style="color:DodgerBlue; font-size: 20px;"> These are all your posts! </p>
+
+
 <table class="table table-bordered table-striped display-5 text-primary table-hover">
   <thead>
   <tr>
@@ -34,18 +37,16 @@ These are all your posts!
 <div class="row">
   <div class="column" style="margin: 20px; width: 40%;" >
 
-    <p>Write your posts here!</p>
+    <p style="color:DodgerBlue; font-size: 20px;"> Write your posts here! </p>
     <form (submit)="createPost({id:0,text:temptext,time:temptime,postedBy:LoggedId})" method="post">
-      <input type="text" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/> <br><br>
+      <input type="text" style="color:MediumSeaGreen;font-size: 30px; border-style: solid; border-color: MediumSeaGreen;" name="postbody" placeholder="Write your post here" [(ngModel)]="temptext"/> <br><br>
       <input style="margin:5px; display: inline-block" class="btn btn-success" type="submit" value="Post"/>
     </form>
 
   </div>
   <div class="column" style="margin: 20px; width: 40%;">
-
-    <p>Edit Post Box</p>
-    <input [(ngModel)]="edittext"/> <br><br>
-    <p>Click update post next to the post you want to update with this text.</p>
-
+    <p style="color:DodgerBlue; font-size: 20px;"> Edit Post Box</p>
+    <input style="color:MediumSeaGreen;font-size: 30px; border-style: solid; border-color: MediumSeaGreen;" [(ngModel)]="edittext"/> <br><br>
+    <p style="color:DodgerBlue; font-size: 20px;"> Click update post next to the post you want to update with this text. </p>
   </div>
 </div>
